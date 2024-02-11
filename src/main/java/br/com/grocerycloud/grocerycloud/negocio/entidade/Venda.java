@@ -1,12 +1,19 @@
 package br.com.grocerycloud.grocerycloud.negocio.entidade;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+
+/** 
+ * Esta classe representa uma venda e todos os dados que a tangem.
+ * @author Arthur de Sá Tenório
+ * @category Entidade básica da aplicação
+*/
 
 @Entity
 public class Venda {
@@ -16,20 +23,24 @@ public class Venda {
     private Date dataVenda;
     private double valorTotal;
     
-    @OneToOne
+    @ManyToOne
     private Cliente cliente;
-
-    @OneToOne
+    
+    @ManyToOne
     private Funcionario funcionario;
+    
+    @ManyToOne(targetEntity = ProdutoVenda.class)
+    private List<ProdutoVenda> produtosVenda;
 
     public Venda(){}
 
-    public Venda(long id, Date dataVenda, double valorTotal, Cliente cliente, Funcionario funcionario) {
+    public Venda(long id, Date dataVenda, double valorTotal, Cliente cliente, Funcionario funcionario, List<ProdutoVenda> produtosVenda) {
         this.id = id;
         this.dataVenda = dataVenda;
         this.valorTotal = valorTotal;
         this.cliente = cliente;
         this.funcionario = funcionario;
+        this.produtosVenda = produtosVenda;
     }
 
     public long getId() {
@@ -65,5 +76,12 @@ public class Venda {
     }
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
+    }
+
+    public List<ProdutoVenda> getProdutosVenda() {
+        return this.produtosVenda;
+    }
+    public void setProdutosVenda(List<ProdutoVenda> produtosVenda) {
+        this.produtosVenda = produtosVenda;
     }
 }

@@ -1,0 +1,64 @@
+package br.com.grocerycloud.grocerycloud.negocio.entidade;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+/** 
+ * Esta classe representa um produto que foi vendido, o qual
+ * faz parte de uma Venda.
+ * @author Arthur de Sá Tenório
+ * @category Entidade básica da aplicação
+*/
+
+@Entity
+public class ProdutoVenda {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @ManyToOne
+    private Produto produto;
+    
+    private int quantidade;
+    private double valorUnit;
+
+    public ProdutoVenda(){}
+
+    public ProdutoVenda(long id, Produto produto, int quantidade, double valorUnit) {
+        this.id = id;
+        this.produto = produto;
+        this.quantidade = quantidade;
+        this.valorUnit = valorUnit;
+    }
+    
+    public long getId() {
+        return this.id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Produto getProduto() {
+        return this.produto;
+    }
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public int getQuantidade() {
+        return this.quantidade;
+    }
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public double getValorUnit() {
+        return this.valorUnit;
+    }
+    public void setValorUnit(double valorUnit) {
+        this.valorUnit = valorUnit;
+    }
+}
