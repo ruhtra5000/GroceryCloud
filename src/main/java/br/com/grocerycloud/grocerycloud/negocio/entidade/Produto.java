@@ -18,8 +18,7 @@ public class Produto {
 
     public Produto(){}
 
-    public Produto(long id, String nome, String categoria, int qtdeEstoque, double preco, double precoDesconto) {
-        this.id = id;
+    public Produto(String nome, String categoria, int qtdeEstoque, double preco, double precoDesconto) {
         this.nome = nome;
         this.categoria = categoria;
         this.qtdeEstoque = qtdeEstoque;

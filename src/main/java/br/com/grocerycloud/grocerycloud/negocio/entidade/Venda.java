@@ -34,8 +34,7 @@ public class Venda {
 
     public Venda(){}
 
-    public Venda(long id, Date dataVenda, double valorTotal, Cliente cliente, Funcionario funcionario, List<ProdutoVenda> produtosVenda) {
-        this.id = id;
+    public Venda(Date dataVenda, double valorTotal, Cliente cliente, Funcionario funcionario, List<ProdutoVenda> produtosVenda) {
         this.dataVenda = dataVenda;
         this.valorTotal = valorTotal;
         this.cliente = cliente;

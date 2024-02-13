@@ -27,8 +27,7 @@ public class ProdutoVenda {
 
     public ProdutoVenda(){}
 
-    public ProdutoVenda(long id, Produto produto, int quantidade, double valorUnit) {
-        this.id = id;
+    public ProdutoVenda(Produto produto, int quantidade, double valorUnit) {
         this.produto = produto;
         this.quantidade = quantidade;
         this.valorUnit = valorUnit;

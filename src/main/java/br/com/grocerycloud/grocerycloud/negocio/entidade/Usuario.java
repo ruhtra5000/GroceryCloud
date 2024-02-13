@@ -19,8 +19,7 @@ public abstract class Usuario {
 
     public Usuario(){}
 
-    public Usuario (long id, String nome, String cpf, String senha){
-        this.id = id;
+    public Usuario (String nome, String cpf, String senha){
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;

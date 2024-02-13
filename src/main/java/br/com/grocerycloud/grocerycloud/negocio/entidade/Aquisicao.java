@@ -31,8 +31,7 @@ public class Aquisicao {
 
     public Aquisicao(){}
 
-    public Aquisicao(long id, Date dataAquisicao, String cnpjFornecedor, Produto produto, int qtdeProduto, double custo) {
-        this.id = id;
+    public Aquisicao(Date dataAquisicao, String cnpjFornecedor, Produto produto, int qtdeProduto, double custo) {
         this.dataAquisicao = dataAquisicao;
         this.cnpjFornecedor = cnpjFornecedor;
         this.produto = produto;
