@@ -16,11 +16,6 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
 
 @Repository
 public interface InterfaceRepositorioAquisicoes extends JpaRepository<Aquisicao, Long>{
-    //Criação e deleção
-    Aquisicao save(Aquisicao venda);
-    void deleteById(long id);
-    //Buscas
-    List<Aquisicao> findAll();
-    List<Aquisicao> findById(long id);
-    List<Aquisicao> findByCnpjFornecedor(String cnpjFornecedor);
+    public Aquisicao findById(long id);
+    public List<Aquisicao> findByCnpjFornecedor(String cnpjFornecedor);
 }

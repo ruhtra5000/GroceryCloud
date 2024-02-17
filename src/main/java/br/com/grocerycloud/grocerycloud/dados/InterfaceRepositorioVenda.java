@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
+import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 
 /** 
@@ -16,9 +18,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 
 @Repository
 public interface InterfaceRepositorioVenda extends JpaRepository <Venda, Long> {
-    //Criação
-    Venda save(Venda venda);
-    //Buscas
-    List<Venda> findAll();
-    List<Venda> findById(long id);
+    public Venda findById(long id);
+    public List<Venda> findAllByCliente(Cliente cliente);
+    public List<Venda> findAllByFuncionario(Funcionario funcionario);
 }
