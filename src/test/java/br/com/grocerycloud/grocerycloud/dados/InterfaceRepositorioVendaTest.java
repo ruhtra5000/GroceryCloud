@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class InterfaceRepositorioVendaTest {
     @Autowired
-    private InterfaceRepositorioVenda repositorioVenda;
+    private IRepositorioVenda repositorioVenda;
 
     @Test
     public void cadastroVendaTest(){

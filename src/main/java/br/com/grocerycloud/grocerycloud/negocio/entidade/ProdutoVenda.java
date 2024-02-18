@@ -60,4 +60,14 @@ public class ProdutoVenda {
     public void setValorUnit(double valorUnit) {
         this.valorUnit = valorUnit;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        //No contexto de uma venda, é provável que o produtoVenda ainda não tenha um ID,
+        //portanto, o produtoVenda é igual a outro se, e somente se, o id do produto o qual ele
+        //se refere já pode ser encontrado no "carrinho"
+        if(obj instanceof ProdutoVenda)
+            return (this.produto.getId() == ((ProdutoVenda)obj).getProduto().getId());
+        return false;
+    }
 }

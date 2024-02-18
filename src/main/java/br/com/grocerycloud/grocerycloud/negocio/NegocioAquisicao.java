@@ -3,14 +3,13 @@ package br.com.grocerycloud.grocerycloud.negocio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.grocerycloud.grocerycloud.dados.InterfaceRepositorioAquisicoes;
+import br.com.grocerycloud.grocerycloud.dados.IRepositorioAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.AquisicaoNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.CnpjNaoEncontradoException;
 
 import java.util.List;
-import java.util.Objects;
 
 /** 
  * Esta classe implementa as ações e as regras de negocio relacionadas a uma aquisição.
@@ -19,9 +18,9 @@ import java.util.Objects;
 */
 
 @Service
-public class NegocioAquisicao implements IColecaoAquisicao{
+public class NegocioAquisicao implements IColecaoAquisicao {
     @Autowired
-    private InterfaceRepositorioAquisicoes repositorioAquisicao;
+    private IRepositorioAquisicao repositorioAquisicao;
 
     @Override
     public void adicionar(Aquisicao aquisicao) { //Atualizar o estoque

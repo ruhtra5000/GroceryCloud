@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.grocerycloud.grocerycloud.dados.InterfaceRepositorioVenda;
+import br.com.grocerycloud.grocerycloud.dados.IRepositorioVenda;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
+import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
+import br.com.grocerycloud.grocerycloud.negocio.entidade.ProdutoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.UsuarioSemVendasException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.VendaNaoEncontradaException;
@@ -22,13 +24,53 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.VendaNaoEncontradaExcep
 @Service
 public class NegocioVenda implements IColecaoVenda {
     @Autowired
-    private InterfaceRepositorioVenda repositorioVenda;
-
+    private IRepositorioVenda repositorioVenda;
+    
+    //Criação de uma venda
     @Override
-    public void adicionar(Venda venda) { //Atualizar o estoque
+    public void adicionar(Venda venda) { 
         repositorioVenda.save(venda);
     }
 
+    @Override
+    public void adicionarProdutoVenda(Venda venda, ProdutoVenda produtoVenda) {
+        //Caso o produtoVenda já esteja contido na venda, apenas adiciona a quantidade
+        //ao produtoVenda pré-existente.
+        for(var i : venda.getProdutosVenda()){
+            if(i.equals(produtoVenda)){
+                i.setQuantidade(i.getQuantidade() + produtoVenda.getQuantidade());
+                return;
+            }
+        }
+        venda.getProdutosVenda().add(produtoVenda);
+    }
+
+    @Override
+    public void removerProdutoVenda(Venda venda, long idProduto) {
+        for(int i = 0; i < venda.getProdutosVenda().size(); i++){
+            if(venda.getProdutosVenda().get(i).getProduto().getId() == idProduto){
+                venda.getProdutosVenda().remove(i);
+                return;
+            }
+        }
+    }
+
+    @Override
+    public List<ProdutoVenda> listarProdutosVenda(Venda venda){
+        return venda.getProdutosVenda();
+    }
+
+    @Override
+    public void calcularValorTotal(Venda venda) {
+        double valorTotal = 0;
+        for(var i : venda.getProdutosVenda()){
+            valorTotal += (i.getValorUnit()*i.getQuantidade());
+        }
+        
+        venda.setValorTotal(valorTotal);
+    }
+
+    //Listagens de venda. Não estão ligados a criação de uma venda.
     @Override
     public List<Venda> listarTodos() {
         return repositorioVenda.findAll();
