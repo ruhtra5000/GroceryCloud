@@ -28,9 +28,9 @@ public class FachadaCaixa {
     //Armazena temporariamente a venda que está sendo executada.
     private Venda vendaTemporaria;
     
-    public void abrirVenda(long idFuncionario, long idCliente){ //INCOMPLETO
-        //Usuario cliente = buscarCliente(id1) -> buscar cliente por id
-        //Usuario funcionario = buscarFunc(id2) -> buscar funcionario por id
+    public void abrirVenda(String cpfFuncionario, String cpfCliente){ //INCOMPLETO
+        //Usuario cliente = buscarCliente(id1) -> buscar cliente por cpf
+        //Usuario funcionario = buscarFunc(id2) -> buscar funcionario por cpf
         
         //Caso os usuarios em questão sejam encontrados:
             vendaTemporaria = new Venda();
@@ -54,6 +54,10 @@ public class FachadaCaixa {
     public void fecharVenda(){ //INCOMPLETO
         colecaoVenda.adicionar(vendaTemporaria);
         //Atualizar o estoque
+        vendaTemporaria = null;
+    }
+
+    public void cancelarVenda(){
         vendaTemporaria = null;
     }
 }
