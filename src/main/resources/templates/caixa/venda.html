@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Venda</title>
 </head>
-<body>
+<body class="m-3">
     <div class="row">
         <div id="listaProd" class="col-8">
             <table class="table table-striped">
@@ -30,10 +30,12 @@
               </table>
         </div>
         <div id="acoes" class="container col-4">
-            <label for="produto" class="form-label">ID do produto:</label><br/>
-            <input type="number" class="form-control" name="idProd" id="produto" min="1"><br/>
-            <label for="quantidade" class="form-label">Quantidade do produto:</label><br/>
+            <label for="produto" class="form-label">ID do produto:</label>
+            <input type="number" class="form-control" name="idProd" id="produto" min="1"><br>
+
+            <label for="quantidade" class="form-label">Quantidade do produto:</label>
             <input type="number" class="form-control" name="quantProd" id="quantidade" min="1"><br/>
+            
             <button type="button" class="btn btn-success">Adicionar produto</button><br/>
             <button type="button" class="btn btn-danger">Remover produto</button><br/>
             <button type="button" class="btn btn-primary">Finalizar venda</button><br/>

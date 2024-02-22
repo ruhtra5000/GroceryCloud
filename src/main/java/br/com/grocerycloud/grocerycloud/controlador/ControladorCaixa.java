@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/** 
+ * Esta classe representa o controlador do caixa.
+ * @author Arthur de Sá Tenório
+ * @category Classe de controlador da aplicação
+*/
+
 @Controller
 @RequestMapping("/caixa")
 public class ControladorCaixa {

@@ -1,5 +1,6 @@
 package br.com.grocerycloud.grocerycloud.negocio.fachada;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
+import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.AquisicaoNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.CnpjNaoEncontradoException;
 
@@ -28,13 +30,26 @@ public class FachadaGerente {
     //NECESSARIO COLECAO DE PRODUTOS, USUARIOS, TROCAS, QUASE TUDO
 
     //VENDAS
+    public List<Venda> listarVendas(){
+        return colecaoVenda.listarTodos();
+    }
 
     //AQUISIÇÕES
-    public void adicionarAquisicao(Date dataAquisicao, String cnpjFornecedor,
-                                   long idProduto, int qtdeProduto, double custo){
+    public void adicionarAquisicao(String cnpjFornecedor, long idProduto, int qtdeProduto,
+                                    double custo, String dataAquisicao){
+        //Buscando produto pelo ID
         Produto produto; //= buscarProduto(id);
+        
+        //Configurando a data
+        Calendar c = Calendar.getInstance();
+        String [] dataArray = dataAquisicao.split("-", 0);
+        c.set(Integer.parseInt(dataArray[0]), Integer.parseInt(dataArray[1]), Integer.parseInt(dataArray[2]));
+        Date data = c.getTime();
+
+        //Criando a aquisição e adicionando ao repositorio
         //Aquisicao aquisicao = new Aquisicao(dataAquisicao, cnpjFornecedor, produto, qtdeProduto, custo);
         //colecaoAquisicao.adicionar(aquisicao);
+        
         //ATUALIZAR ESTOQUE
     }
 

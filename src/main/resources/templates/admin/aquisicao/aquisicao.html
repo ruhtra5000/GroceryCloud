@@ -7,7 +7,34 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Aquisições</title>
 </head>
-<body>
-    <h1>Aquisições</h1>
+<body class="m-3">
+    <div class="d-flex justify-content-center">
+        <h1>Aquisições</h1>
+    </div>
+    <a href="/admin/aquisicao/registro"><button class="btn btn-primary">Registrar nova aquisição</button></a>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">CNPJ</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Qtde</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Data</th>
+                  </tr>
+            </thead>
+            <tbody>
+                <tr th:each="aquisicao : ${aquisicoes}">
+                    <td th:text="${aquisicao.id}"></td>
+                    <td th:text="${aquisicao.cnpjFornecedor}"></td>
+                    <td th:text="${aquisicao.produto.nome}"></td>
+                    <td th:text="${aquisicao.qtdeProduto}"></td>
+                    <td th:text="${aquisicao.custo}"></td>
+                    <td th:text="${aquisicao.dataAquisicao}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
