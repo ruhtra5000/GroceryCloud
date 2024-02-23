@@ -9,8 +9,31 @@
 </head>
 <body class="m-3">
     <div class="d-flex justify-content-center">
-        <h1>Vendas admin</h1>
+        <h1>Vendas - Gerência</h1>
     </div>
-    
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Op. de caixa</th>
+                    <th scope="col">Valor total</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Detalhar</th>
+                  </tr>
+            </thead>
+            <tbody>
+                <tr th:each="venda : ${vendas}">
+                    <td th:text="${venda.id}"></td>
+                    <td th:text="${venda.cliente.nome}"></td>
+                    <td th:text="${venda.funcionario.nome}"></td>
+                    <td th:text="${venda.valorTotal}"></td>
+                    <td th:text="${venda.dataVenda}"></td>
+                    <td th:href="@{'/admin/venda'+venda.id}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

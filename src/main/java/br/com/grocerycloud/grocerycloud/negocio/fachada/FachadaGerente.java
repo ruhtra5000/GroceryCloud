@@ -14,6 +14,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.AquisicaoNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.CnpjNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.VendaNaoEncontradaException;
 
 /** 
  * Esta classe representa a fachada que será utilizada pelos gerentes.
@@ -32,6 +33,10 @@ public class FachadaGerente {
     //VENDAS
     public List<Venda> listarVendas(){
         return colecaoVenda.listarTodos();
+    }
+
+    public Venda listarVendaPorId(long id) throws VendaNaoEncontradaException{
+        return colecaoVenda.listarPorId(id);
     }
 
     //AQUISIÇÕES

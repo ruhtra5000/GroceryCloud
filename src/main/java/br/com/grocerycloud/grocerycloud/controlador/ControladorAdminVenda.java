@@ -3,9 +3,14 @@ package br.com.grocerycloud.grocerycloud.controlador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.VendaNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /** 
  * Esta classe representa o controlador de venda da gerencia.
@@ -20,8 +25,24 @@ public class ControladorAdminVenda {
     private FachadaGerente fachadaGerente;
 
     @GetMapping("/")
-    public String home() {
-        return "admin/venda/vendas";
+    public ModelAndView homeAdminVenda() {
+        ModelAndView mv = new ModelAndView("admin/venda/vendas");
+        mv.addObject("vendas", fachadaGerente.listarVendas());
+        return mv;
     }
+
+    @GetMapping("/{id}")
+    public ModelAndView detalharVenda(@PathVariable long idVenda) {
+        try {
+            ModelAndView mv = new ModelAndView("/admin/venda/vendaDetalhada");
+            mv.addObject("venda", fachadaGerente.listarVendaPorId(idVenda));
+            return mv;
+        }
+        catch (VendaNaoEncontradaException err){
+            System.out.println("Id da venda inválido");
+        }
+        return null;//Mudar, talvez
+    }
+    
     
 }
