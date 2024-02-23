@@ -102,8 +102,7 @@ public class NegocioProduto implements IColecaoProduto{
 		produtoComDesconto.setPrecoDesconto(novoPreco);
 	}
 	
-	// Produto avariado
-
+	// Produto avariado //MODIFICAR
 	@Override
 	public void avariar(long id, int qtdeAvariados) throws ProdutoNaoEncontradoException, ProdutoSemEstoqueException{
 		Produto produto = listarPorId(id);
@@ -114,7 +113,7 @@ public class NegocioProduto implements IColecaoProduto{
 		Date date = new Date();
 		
 		ProdutoAvariado avariado = new ProdutoAvariado(produto, qtdeAvariados, date);
-		repositorioProduto.save(avariado);
+		//repositorioProduto.save(avariado);
 		produto.setQtdeEstoque(produto.getQtdeEstoque() - qtdeAvariados);
 		
 	}
