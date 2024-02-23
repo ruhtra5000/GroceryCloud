@@ -2,15 +2,21 @@ package br.com.grocerycloud.grocerycloud.negocio.entidade;
 
 import java.util.Date;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
+@Entity
 public class ProdutoAvariado {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idAvariado;
+	private long id;
+	
+	@ManyToOne
 	private Produto produto;
+
 	private int qtdeAvariados;
 	private Date dataAvariado;
 
@@ -20,12 +26,11 @@ public class ProdutoAvariado {
 		this.dataAvariado = dataAvariado;
 	}
 
-	public long getIdAvariado() {
-		return idAvariado;
+	public long getId() {
+		return id;
 	}
-
-	public void setIdAvariado(long idAvariado) {
-		this.idAvariado = idAvariado;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public int getQtdeAvariados() {

@@ -48,7 +48,6 @@ public class NegocioProduto implements IColecaoProduto{
 		produto.setNome(nome);
 		produto.setPreco(preco);
 		produto.setPrecoDesconto(precoDesconto);
-		
 	}
 
 	@Override

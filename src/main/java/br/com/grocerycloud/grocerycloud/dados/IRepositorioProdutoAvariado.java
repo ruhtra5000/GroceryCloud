@@ -19,8 +19,8 @@ public interface IRepositorioProdutoAvariado extends JpaRepository<ProdutoAvaria
 
 	public ProdutoAvariado findById(long id);
 
-	public List<ProdutoAvariado> findAllByNomes(String nome);
+	//public List<ProdutoAvariado> findAllByNome(String nome);
 
-	public List<ProdutoAvariado> findAllByCategoria(String categoria);
+	//public List<ProdutoAvariado> findAllByCategoria(String categoria);
 
 }
