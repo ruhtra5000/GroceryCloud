@@ -11,5 +11,9 @@ public class GrocerycloudApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GrocerycloudApplication.class, args);
 	}
-
+	
+	@RequestMapping("/")
+	public String init(){
+		return "APLICAÇÃO RODANDO";
+	}
 }
