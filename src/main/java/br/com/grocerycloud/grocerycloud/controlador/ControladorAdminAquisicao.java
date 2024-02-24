@@ -6,8 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.grocerycloud.grocerycloud.controlador.dto.RequisicaoRegistrarAquisicao;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.AquisicaoNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.CnpjNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /** 
@@ -36,8 +40,41 @@ public class ControladorAdminAquisicao {
     
     @PostMapping("/registro")
     public String postRegistroAquisicao(RequisicaoRegistrarAquisicao a) {
-        fachadaGerente.adicionarAquisicao(a.getCnpjFornecedor(), a.getIdProduto(), 
-        a.getQtdeProduto(), a.getCusto(), a.getDataAquisicao());
+        try {
+            fachadaGerente.adicionarAquisicao(a.getCnpjFornecedor(), a.getIdProduto(), 
+            a.getQtdeProduto(), a.getCusto(), a.getDataAquisicao());
+        }
+        catch(ProdutoNaoEncontradoException err){
+            System.out.println(err.getMessage());
+        }
         return "redirect:/admin/aquisicao/";
     }
+
+    @GetMapping("/id/{id}")
+    public ModelAndView buscaAquisicaoID(@PathVariable("id") long id) {
+        try {
+            ModelAndView mv = new ModelAndView("admin/aquisicao/aquisicao");
+            mv.addObject("aquisicoes", fachadaGerente.buscarAquisicaoPorId(id));
+            return mv;
+        }
+        catch(AquisicaoNaoEncontradaException err){
+            System.out.println(err.getMessage());
+        }
+        return null;
+    }
+
+    @GetMapping("/cnpj/{cnpj}")
+    public ModelAndView buscaAquisicaoCNPJ(@PathVariable("cnpj") String cnpj) {
+        try {
+            ModelAndView mv = new ModelAndView("admin/aquisicao/aquisicao");
+            mv.addObject("aquisicoes", fachadaGerente.buscarAquisicaoPorCnpj(cnpj));
+            return mv;
+        }
+        catch(CnpjNaoEncontradoException err){
+            System.out.println(err.getMessage());
+        }
+        return null;
+    }
+
+
 }

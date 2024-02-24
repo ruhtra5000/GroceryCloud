@@ -23,7 +23,7 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoSemEsto
 */
 
 @Service
-public class NegocioProduto implements IColecaoProduto{
+public class NegocioProduto implements IColecaoProduto {
     @Autowired
     private IRepositorioProduto repositorioProduto;
 
@@ -48,6 +48,8 @@ public class NegocioProduto implements IColecaoProduto{
 		produto.setNome(nome);
 		produto.setPreco(preco);
 		produto.setPrecoDesconto(precoDesconto);
+
+		repositorioProduto.save(produto);
 	}
 
 	@Override

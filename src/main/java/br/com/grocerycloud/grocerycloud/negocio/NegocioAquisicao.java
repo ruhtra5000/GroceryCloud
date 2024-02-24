@@ -23,7 +23,7 @@ public class NegocioAquisicao implements IColecaoAquisicao {
     private IRepositorioAquisicao repositorioAquisicao;
 
     @Override
-    public void adicionar(Aquisicao aquisicao) { //Atualizar o estoque
+    public void adicionar(Aquisicao aquisicao) {
         repositorioAquisicao.save(aquisicao);
     }
 
@@ -42,7 +42,7 @@ public class NegocioAquisicao implements IColecaoAquisicao {
 
     @Override
     public List<Aquisicao> listarPorCNPJ(String cnpj) throws CnpjNaoEncontradoException {
-        List<Aquisicao> aquisicoes = repositorioAquisicao.findByCnpjFornecedor(cnpj);
+        List<Aquisicao> aquisicoes = repositorioAquisicao.findAllByCnpjFornecedor(cnpj);
         if(aquisicoes.isEmpty())
             throw new CnpjNaoEncontradoException();
         return aquisicoes;

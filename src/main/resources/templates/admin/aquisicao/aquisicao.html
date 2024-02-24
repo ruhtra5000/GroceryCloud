@@ -8,11 +8,25 @@
     <title>Aquisições</title>
 </head>
 <body class="m-3">
-    <div class="d-flex justify-content-center">
-        <h1>Aquisições</h1>
-    </div>
-    <a href="/admin/aquisicao/registro"><button class="btn btn-primary">Registrar nova aquisição</button></a>
     <div class="container">
+        <div class="d-flex">
+            <h1 class="p-2 flex-grow-1">Aquisições</h1>
+            <div class="p-2 align-self-center">
+                <a href="/admin/aquisicao/registro"><button class="btn btn-primary">Registrar nova aquisição</button></a>
+            </div>
+            <div class="p-2 align-self-center">
+                <input type="text" class="form-control-sm" name="buscaCampo" id="buscaCampo" placeholder="ID">
+                <a href="/admin/aquisicao/id/" id="rota"><button class="btn btn-secondary">Buscar</button></a>
+                <br>
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="busca" id="btnradio1" autocomplete="off" checked>
+                    <label class="btn btn-outline-warning" for="btnradio1">ID</label>
+                  
+                    <input type="radio" class="btn-check" name="busca" id="btnradio2" autocomplete="off">
+                    <label class="btn btn-outline-warning" for="btnradio2">CNPJ</label>
+                  </div>
+            </div>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -37,4 +51,30 @@
         </table>
     </div>
 </body>
+
+<script>
+    const inputBusca = document.querySelector("#buscaCampo")
+    const botaoRota = document.querySelector("#rota")
+    var rotaBase = "/admin/aquisicao/id/"
+
+    document.querySelector('#btnradio1').addEventListener("click", () => {
+        rotaBase = "/admin/aquisicao/id/"
+        inputBusca.setAttribute("placeholder", "ID")
+        var texto = inputBusca.value
+        botaoRota.setAttribute("href", rotaBase+texto)
+    })
+
+    document.querySelector('#btnradio2').addEventListener("click", () => {
+        rotaBase = "/admin/aquisicao/cnpj/"
+        inputBusca.setAttribute("placeholder", "CNPJ")
+        var texto = inputBusca.value
+        botaoRota.setAttribute("href", rotaBase+texto)
+    })
+
+    inputBusca.addEventListener("input", () => {
+        var texto = inputBusca.value
+        botaoRota.setAttribute("href", rotaBase+texto)
+    })
+</script>
+
 </html>

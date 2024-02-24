@@ -32,7 +32,7 @@ public class ControladorAdminVenda {
     }
 
     @GetMapping("/{id}")
-    public ModelAndView detalharVenda(@PathVariable long idVenda) {
+    public ModelAndView detalharVenda(@PathVariable("id") long idVenda) {
         try {
             ModelAndView mv = new ModelAndView("/admin/venda/vendaDetalhada");
             mv.addObject("venda", fachadaGerente.listarVendaPorId(idVenda));
