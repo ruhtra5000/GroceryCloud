@@ -12,19 +12,16 @@
         <div class="d-flex">
             <h1 class="p-2 flex-grow-1">Aquisições</h1>
             <div class="p-2 align-self-center">
-                <a href="/admin/aquisicao/registro"><button class="btn btn-primary">Registrar nova aquisição</button></a>
+                <a href="/admin/aquisicao/registro"><button class="btn btn-success">Registrar nova aquisição</button></a>
             </div>
+            
             <div class="p-2 align-self-center">
-                <input type="text" class="form-control-sm" name="buscaCampo" id="buscaCampo" placeholder="ID">
-                <a href="/admin/aquisicao/id/" id="rota"><button class="btn btn-secondary">Buscar</button></a>
-                <br>
-                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="busca" id="btnradio1" autocomplete="off" checked>
-                    <label class="btn btn-outline-warning" for="btnradio1">ID</label>
-                  
-                    <input type="radio" class="btn-check" name="busca" id="btnradio2" autocomplete="off">
-                    <label class="btn btn-outline-warning" for="btnradio2">CNPJ</label>
-                  </div>
+                <div class="input-group">
+                    <button class="btn btn-outline-secondary" id="idButton1" type="button">ID</button>
+                    <button class="btn btn-outline-secondary" id="idButton2" type="button">CNPJ</button>                  
+                    <input type="text" class="form-control-sm" name="buscaCampo" id="buscaCampo" placeholder="ID">
+                    <a href="/admin/aquisicao/id/" id="rota"><button class="btn btn-primary">Buscar</button></a>
+                </div>
             </div>
         </div>
         <table class="table table-striped">
@@ -44,7 +41,7 @@
                     <td th:text="${aquisicao.cnpjFornecedor}"></td>
                     <td th:text="${aquisicao.produto.nome}"></td>
                     <td th:text="${aquisicao.qtdeProduto}"></td>
-                    <td th:text="${aquisicao.custo}"></td>
+                    <td th:text="${aquisicao.custo}">R$ </td>
                     <td th:text="${aquisicao.dataAquisicao}"></td>
                 </tr>
             </tbody>
@@ -57,24 +54,25 @@
     const botaoRota = document.querySelector("#rota")
     var rotaBase = "/admin/aquisicao/id/"
 
-    document.querySelector('#btnradio1').addEventListener("click", () => {
+    document.querySelector('#idButton1').addEventListener("click", () => {
         rotaBase = "/admin/aquisicao/id/"
         inputBusca.setAttribute("placeholder", "ID")
         var texto = inputBusca.value
         botaoRota.setAttribute("href", rotaBase+texto)
     })
 
-    document.querySelector('#btnradio2').addEventListener("click", () => {
+    document.querySelector('#idButton2').addEventListener("click", () => {
         rotaBase = "/admin/aquisicao/cnpj/"
         inputBusca.setAttribute("placeholder", "CNPJ")
         var texto = inputBusca.value
+        texto = texto.replace('/', '&');
         botaoRota.setAttribute("href", rotaBase+texto)
     })
 
     inputBusca.addEventListener("input", () => {
         var texto = inputBusca.value
+        texto = texto.replace('/', '&');
         botaoRota.setAttribute("href", rotaBase+texto)
     })
 </script>
-
 </html>

@@ -8,10 +8,14 @@
     <title>Vendas</title>
 </head>
 <body class="m-3">
-    <div class="d-flex justify-content-center">
-        <h1>Vendas - Gerência</h1>
-    </div>
     <div class="container">
+        <div class="d-flex">
+            <h1 class="p-2 flex-grow-1">Vendas</h1>
+            <div class="p-2 align-self-center">                  
+                <input type="text" class="form-control-sm" name="buscaCampo" id="buscaCampo" placeholder="ID">
+                <a href="/admin/venda/id/" id="rota"><button class="btn btn-primary">Buscar</button></a>
+            </div>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -30,10 +34,21 @@
                     <td th:text="${venda.funcionario.nome}"></td>
                     <td th:text="${venda.valorTotal}"></td>
                     <td th:text="${venda.dataVenda}"></td>
-                    <td th:href="@{'/admin/venda'+venda.id}"></td>
+                    <td th:href="@{'/admin/venda/'+venda.id}"></td>
                 </tr>
             </tbody>
         </table>
     </div>
 </body>
+
+<script>
+    const inputBusca = document.querySelector("#buscaCampo")
+    const botaoRota = document.querySelector("#rota")
+    var rotaBase = "/admin/venda/id/"
+
+    inputBusca.addEventListener("input", () => {
+        var texto = inputBusca.value
+        botaoRota.setAttribute("href", rotaBase+texto)
+    })
+</script>
 </html>

@@ -12,8 +12,9 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.ProdutoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.UsuarioSemVendasException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.VendaNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.UsuarioSemVendasException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.VendaNaoEncontradaException;
 
 /** 
  * Esta classe implementa as ações e as regras de negocio relacionadas a uma venda
@@ -34,25 +35,18 @@ public class NegocioVenda implements IColecaoVenda {
 
     @Override
     public void adicionarProdutoVenda(Venda venda, ProdutoVenda produtoVenda) {
-        //Caso o produtoVenda já esteja contido na venda, apenas adiciona a quantidade
-        //ao produtoVenda pré-existente.
-        for(var i : venda.getProdutosVenda()){
-            if(i.equals(produtoVenda)){
-                i.setQuantidade(i.getQuantidade() + produtoVenda.getQuantidade());
-                return;
-            }
-        }
         venda.getProdutosVenda().add(produtoVenda);
     }
 
     @Override
-    public void removerProdutoVenda(Venda venda, long idProduto) {
+    public void removerProdutoVenda(Venda venda, long idProduto) throws ProdutoNaoEncontradoException {
         for(int i = 0; i < venda.getProdutosVenda().size(); i++){
             if(venda.getProdutosVenda().get(i).getProduto().getId() == idProduto){
                 venda.getProdutosVenda().remove(i);
                 return;
             }
         }
+        throw new ProdutoNaoEncontradoException();
     }
 
     @Override

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.VendaNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.VendaNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,5 +44,16 @@ public class ControladorAdminVenda {
         return null;//Mudar, talvez
     }
     
-    
+    @GetMapping("/id/{id}")
+    public ModelAndView buscarVenda(@PathVariable("id") long idVenda){
+        try {
+            ModelAndView mv = new ModelAndView("admin/venda/vendas");
+            mv.addObject("vendas", fachadaGerente.listarVendaPorId(idVenda));
+            return mv;
+        }
+        catch (VendaNaoEncontradaException err){
+            System.out.println("Id da venda inválido");
+        }
+        return null;//Mudar, talvez
+    }
 }

@@ -3,8 +3,8 @@ package br.com.grocerycloud.grocerycloud.negocio.colecoes;
 import java.util.List;
 
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.AquisicaoNaoEncontradaException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.CnpjNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
 
 /** 
  * Esta classe implementa o contrato de uma aquisição, estabelecendo 

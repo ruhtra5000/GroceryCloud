@@ -1,4 +1,4 @@
-package br.com.grocerycloud.grocerycloud.negocio.excecoes;
+package br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas;
 
 /** 
  * @author Arthur de Sá Tenório

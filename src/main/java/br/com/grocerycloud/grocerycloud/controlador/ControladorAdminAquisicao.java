@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.grocerycloud.grocerycloud.controlador.dto.RequisicaoRegistrarAquisicao;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.AquisicaoNaoEncontradaException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.CnpjNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,6 +65,8 @@ public class ControladorAdminAquisicao {
 
     @GetMapping("/cnpj/{cnpj}")
     public ModelAndView buscaAquisicaoCNPJ(@PathVariable("cnpj") String cnpj) {
+        cnpj = cnpj.replace('&', '/');
+        System.out.println("cnpn: " + cnpj);
         try {
             ModelAndView mv = new ModelAndView("admin/aquisicao/aquisicao");
             mv.addObject("aquisicoes", fachadaGerente.buscarAquisicaoPorCnpj(cnpj));

@@ -13,11 +13,11 @@ import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.AquisicaoNaoEncontradaException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.CnpjNaoEncontradoException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.VendaNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.EstoqueVazioException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.VendaNaoEncontradaException;
 
 /** 
  * Esta classe representa a fachada que será utilizada pelos gerentes.

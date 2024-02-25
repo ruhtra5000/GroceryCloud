@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import br.com.grocerycloud.grocerycloud.dados.IRepositorioAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.AquisicaoNaoEncontradaException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.CnpjNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
 
 import java.util.List;
 
