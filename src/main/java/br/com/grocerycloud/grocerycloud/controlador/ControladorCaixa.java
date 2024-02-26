@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
 
 /** 
  * Esta classe representa o controlador do caixa.
@@ -46,54 +42,55 @@ public class ControladorCaixa {
 
     @PostMapping("/venda/add")
     public ModelAndView adicionarProdutoVenda(RequisicaoAdicionarProdutoVenda r) {
+        ModelAndView mv = new ModelAndView("caixa/venda");
         try {
             fachadaCaixa.adicionarProdutoVenda(r.getId(), r.getQuantidade());
-            ModelAndView mv = new ModelAndView("caixa/venda");
             mv.addObject("produtos", fachadaCaixa.listarProdutosVenda());
             mv.addObject("valorTotal", fachadaCaixa.retornarValorTotal());
-            return mv;
         }
         catch(ProdutoNaoEncontradoException err){
-            System.out.println(err.getMessage());
+           mv.setViewName("geral/erro");
+           mv.addObject("erro", err.getMessage());
         }
         catch(ProdutoInsuficienteException err2){
-            System.out.println(err2.getMessage());
+           mv.setViewName("geral/erro");
+           mv.addObject("erro", err2.getMessage());
         }
-        return null;
+        return mv;
     }
 
     @PostMapping("/venda/remove")
     public ModelAndView removerProdutoVenda(RequisicaoRemoverProdutoVenda r) {
+        ModelAndView mv = new ModelAndView("caixa/venda");
         try {
             fachadaCaixa.removerProdutoVenda(r.getIdRemocao());
-            ModelAndView mv = new ModelAndView("caixa/venda");
             mv.addObject("produtos", fachadaCaixa.listarProdutosVenda());
             mv.addObject("valorTotal", fachadaCaixa.retornarValorTotal());
-            return mv;
         }
         catch(ProdutoNaoEncontradoException err){
-            System.out.println(err.getMessage());
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());
         }
-        return null;
+        return mv;
     }
 
     @GetMapping("/venda/fechar")
-    public String fecharVenda() {
+    public ModelAndView fecharVenda() {
+        ModelAndView mv = new ModelAndView("redirect:/caixa/");
         try {
             fachadaCaixa.fecharVenda();
         }
         catch(ProdutoNaoEncontradoException err){
-            System.out.println(err.getMessage());
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());
         }
-        return "redirect:/caixa/";
+        return mv;
     }
 
     @GetMapping("/venda/cancelar")
-    public String cancelarVenda() {
+    public ModelAndView cancelarVenda() {
+        ModelAndView mv = new ModelAndView("redirect:/caixa/");
         fachadaCaixa.cancelarVenda();
-        return "redirect:/caixa/";
+        return mv;
     }
-    
-    
-    
 }

@@ -34,49 +34,51 @@ public class ControladorAdminAquisicao {
     }
 
     @GetMapping("/registro")
-    public String registroAquisicao() {
-        return "admin/aquisicao/cadastroAquisicao";
+    public ModelAndView registroAquisicao() {
+        ModelAndView mv = new ModelAndView("admin/aquisicao/cadastroAquisicao");
+        return mv;
     }
     
     @PostMapping("/registro")
-    public String postRegistroAquisicao(RequisicaoRegistrarAquisicao a) {
+    public ModelAndView postRegistroAquisicao(RequisicaoRegistrarAquisicao a) {
+        ModelAndView mv = new ModelAndView("redirect:/admin/aquisicao/");
         try {
             fachadaGerente.adicionarAquisicao(a.getCnpjFornecedor(), a.getIdProduto(), 
             a.getQtdeProduto(), a.getCusto(), a.getDataAquisicao());
         }
         catch(ProdutoNaoEncontradoException err){
-            System.out.println(err.getMessage());
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());
         }
-        return "redirect:/admin/aquisicao/";
+        return mv;
     }
 
     @GetMapping("/id/{id}")
     public ModelAndView buscaAquisicaoID(@PathVariable("id") long id) {
+        ModelAndView mv = new ModelAndView("admin/aquisicao/aquisicao");
         try {
-            ModelAndView mv = new ModelAndView("admin/aquisicao/aquisicao");
             mv.addObject("aquisicoes", fachadaGerente.buscarAquisicaoPorId(id));
-            return mv;
         }
         catch(AquisicaoNaoEncontradaException err){
-            System.out.println(err.getMessage());
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());
         }
-        return null;
+        return mv;
     }
 
     @GetMapping("/cnpj/{cnpj}")
     public ModelAndView buscaAquisicaoCNPJ(@PathVariable("cnpj") String cnpj) {
         cnpj = cnpj.replace('&', '/');
         System.out.println("cnpn: " + cnpj);
+        ModelAndView mv = new ModelAndView("admin/aquisicao/aquisicao");
         try {
-            ModelAndView mv = new ModelAndView("admin/aquisicao/aquisicao");
             mv.addObject("aquisicoes", fachadaGerente.buscarAquisicaoPorCnpj(cnpj));
-            return mv;
         }
         catch(CnpjNaoEncontradoException err){
-            System.out.println(err.getMessage());
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());
         }
-        return null;
+        return mv;
     }
-
 
 }

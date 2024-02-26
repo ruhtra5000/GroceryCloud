@@ -2,6 +2,7 @@ package br.com.grocerycloud.grocerycloud.controlador;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -9,8 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ControladorAdmin {
     
     @GetMapping("/")
-    public String homeAdmin() {
-        return "admin/menuAdmin";
+    public ModelAndView homeAdmin() {
+        ModelAndView mv = new ModelAndView("admin/menuAdmin");
+        return mv;
     }
     
 }

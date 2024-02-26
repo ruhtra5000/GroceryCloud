@@ -34,6 +34,10 @@ public class FachadaGerente {
     @Autowired
     private IColecaoAquisicao colecaoAquisicao;
 
+    /** 
+     * Métodos que tangem os produtos, na fachada do gerente.
+     * @author Guilherme Paes Cavalcanti
+    */
     //PRODUTOS
     public List<Produto> listarProdutos() throws EstoqueVazioException{
         return colecaoProduto.listarTodos();
@@ -51,6 +55,10 @@ public class FachadaGerente {
 
 
 
+    /** 
+     * Métodos que tangem as vendas, na fachada do gerente.
+     * @author Arthur de Sá Tenório
+    */
     //VENDAS
     public List<Venda> listarVendas(){
         return colecaoVenda.listarTodos();
@@ -62,6 +70,10 @@ public class FachadaGerente {
 
 
 
+    /** 
+     * Métodos que tangem as aquisições, na fachada do gerente.
+     * @author Arthur de Sá Tenório
+    */
     //AQUISIÇÕES
     public void adicionarAquisicao(String cnpjFornecedor, long idProduto, int qtdeProduto,
                                     double custo, String dataAquisicao) throws ProdutoNaoEncontradoException {
