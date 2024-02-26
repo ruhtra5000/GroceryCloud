@@ -8,14 +8,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoAquisicao;
+import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoFuncionario;
+import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoOuvidoria;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoProduto;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
+import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
+import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
+import br.com.grocerycloud.grocerycloud.negocio.entidade.Ouvidoria;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.OuvidoriaNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.EstoqueVazioException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.VendaNaoEncontradaException;
 
@@ -33,6 +43,10 @@ public class FachadaGerente {
     private IColecaoVenda colecaoVenda;
     @Autowired
     private IColecaoAquisicao colecaoAquisicao;
+    @Autowired
+    private IColecaoFuncionario colecaoFuncionario;
+    @Autowired
+    private IColecaoOuvidoria colecaoOuvidoria;
 
     /** 
      * Métodos que tangem os produtos, na fachada do gerente.
@@ -106,4 +120,81 @@ public class FachadaGerente {
     public List<Aquisicao> buscarAquisicaoPorCnpj(String cnpj) throws CnpjNaoEncontradoException {
         return colecaoAquisicao.listarPorCNPJ(cnpj);
     }
+
+
+    /** 
+     * Métodos que tangem os funcionarios, na fachada do gerente.
+     * @author Victor Cauã Tavares Inácio
+    */
+    //FUNCIONARIOS
+
+    public List<Funcionario> listarFuncionarios(){
+        return colecaoFuncionario.listarTodos();
+    }
+
+    public void adicionarFuncionario(String nome, String cpf, String telefone, String email, String senha, int tipoAcesso){
+
+        Funcionario funcionario = new Funcionario();
+
+        funcionario.setCpf(cpf);
+		funcionario.setNome(nome);
+		funcionario.setTelefone(telefone);
+		funcionario.setEmail(email);
+        funcionario.setSenha(senha);
+        funcionario.setTipoAcesso(tipoAcesso);
+
+        colecaoFuncionario.adicionar(funcionario);
+
+    }
+
+    public void removerFuncionario(long id) throws FuncionarioNaoEncontradoException{
+        
+        colecaoFuncionario.remover(id);
+
+    }
+
+    public void atualizarFuncionario(long id, String nome, String cpf, String telefone, String email, String senha, int tipoAcesso) throws FuncionarioNaoEncontradoException{
+
+            colecaoFuncionario.atualizar(id, nome, cpf, telefone, email, senha, tipoAcesso);
+
+    }
+
+    public Funcionario buscarFuncionarioPorCpf(String Cpf) throws CpfNaoEncontradoException{
+
+        return colecaoFuncionario.listarPorCpf(Cpf);
+
+    }
+
+    public List<Funcionario> buscarFuncionarioPorNome(String Nome) throws NomeNaoEncontradoException{
+
+        return colecaoFuncionario.listarPorNome(Nome);
+
+    }
+
+    /** 
+     * Métodos que tangem a Ouvidoria, na fachada do gerente.
+     * @author Victor Cauã Tavares Inácio
+    */
+    //OUVIDORIA
+
+    public Ouvidoria buscarPorId(long id) throws OuvidoriaNaoEncontradaException{
+
+        return colecaoOuvidoria.listarPorId(id);
+
+    }
+
+    List<Ouvidoria> listarTodos(){
+
+        return colecaoOuvidoria.listarTodos();
+
+    }
+
+    List<Ouvidoria> buscarPorCliente(Cliente cliente) throws ClienteNaoEncontradoException{
+
+        return colecaoOuvidoria.listarPorCliente(cliente);
+
+    }
+
 }
+
+
