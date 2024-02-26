@@ -14,14 +14,12 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontr
 /**
  * Esta classe implementa as ações e as regras de negocio relacionadas a um
  * funcionario.
- * 
  * @author Victor Cauã Tavares Inácio
  * @category Classe de negocio da aplicação
  */
 
 @Service
 public class NegocioFuncionario implements IColecaoFuncionario {
-
     @Autowired
     private IRepositorioFuncionario repositorioFuncionario;
 
@@ -53,44 +51,30 @@ public class NegocioFuncionario implements IColecaoFuncionario {
     @Override
     public Funcionario listarPorId(long id) throws FuncionarioNaoEncontradoException {
         Funcionario funcionario = repositorioFuncionario.findById(id);
-		
 		if (funcionario == null)
-			throw new FuncionarioNaoEncontradoException();
-				
+			throw new FuncionarioNaoEncontradoException();	
 		return funcionario;
-
     }
 
     @Override
     public Funcionario listarPorCpf(String cpf) throws CpfNaoEncontradoException {
-
         Funcionario funcionario = repositorioFuncionario.findByCpf(cpf);
-		
 		if (funcionario == null)
 			throw new CpfNaoEncontradoException();
-		
 		return funcionario;  
-
-
     }
 
     @Override
     public List<Funcionario> listarTodos() {
-
         return repositorioFuncionario.findAll();
-
     }
 
     @Override
     public List<Funcionario> listarPorNome(String nome) throws NomeNaoEncontradoException {
-
         List<Funcionario> funcionario = repositorioFuncionario.findAllByNome(nome);
-		
 		if (funcionario.isEmpty())
 			throw new NomeNaoEncontradoException();
-		
 		return funcionario;  
-
     }
 }
 

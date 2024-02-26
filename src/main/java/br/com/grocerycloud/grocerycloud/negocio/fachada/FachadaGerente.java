@@ -122,79 +122,63 @@ public class FachadaGerente {
     }
 
 
+
     /** 
      * Métodos que tangem os funcionarios, na fachada do gerente.
      * @author Victor Cauã Tavares Inácio
     */
     //FUNCIONARIOS
+    public void adicionarFuncionario(String nome, String cpf, String telefone, String email, String senha, int tipoAcesso){
+        Funcionario funcionario = new Funcionario();
+
+        funcionario.setCpf(cpf);
+        funcionario.setNome(nome);
+        funcionario.setTelefone(telefone);
+        funcionario.setEmail(email);
+        funcionario.setSenha(senha);
+        funcionario.setTipoAcesso(tipoAcesso);
+
+        colecaoFuncionario.adicionar(funcionario);
+    }
 
     public List<Funcionario> listarFuncionarios(){
         return colecaoFuncionario.listarTodos();
     }
 
-    public void adicionarFuncionario(String nome, String cpf, String telefone, String email, String senha, int tipoAcesso){
-
-        Funcionario funcionario = new Funcionario();
-
-        funcionario.setCpf(cpf);
-		funcionario.setNome(nome);
-		funcionario.setTelefone(telefone);
-		funcionario.setEmail(email);
-        funcionario.setSenha(senha);
-        funcionario.setTipoAcesso(tipoAcesso);
-
-        colecaoFuncionario.adicionar(funcionario);
-
-    }
-
     public void removerFuncionario(long id) throws FuncionarioNaoEncontradoException{
-        
         colecaoFuncionario.remover(id);
-
     }
 
     public void atualizarFuncionario(long id, String nome, String cpf, String telefone, String email, String senha, int tipoAcesso) throws FuncionarioNaoEncontradoException{
-
-            colecaoFuncionario.atualizar(id, nome, cpf, telefone, email, senha, tipoAcesso);
-
+        colecaoFuncionario.atualizar(id, nome, cpf, telefone, email, senha, tipoAcesso);
     }
 
     public Funcionario buscarFuncionarioPorCpf(String Cpf) throws CpfNaoEncontradoException{
-
         return colecaoFuncionario.listarPorCpf(Cpf);
-
     }
 
     public List<Funcionario> buscarFuncionarioPorNome(String Nome) throws NomeNaoEncontradoException{
-
         return colecaoFuncionario.listarPorNome(Nome);
-
     }
+
+
 
     /** 
      * Métodos que tangem a Ouvidoria, na fachada do gerente.
      * @author Victor Cauã Tavares Inácio
     */
     //OUVIDORIA
-
-    public Ouvidoria buscarPorId(long id) throws OuvidoriaNaoEncontradaException{
-
-        return colecaoOuvidoria.listarPorId(id);
-
+    List<Ouvidoria> listarTodos(){
+        return colecaoOuvidoria.listarTodos();
     }
 
-    List<Ouvidoria> listarTodos(){
-
-        return colecaoOuvidoria.listarTodos();
-
+    public Ouvidoria buscarPorId(long id) throws OuvidoriaNaoEncontradaException{
+        return colecaoOuvidoria.listarPorId(id);
     }
 
     List<Ouvidoria> buscarPorCliente(Cliente cliente) throws ClienteNaoEncontradoException{
-
         return colecaoOuvidoria.listarPorCliente(cliente);
-
     }
-
 }
 
 

@@ -27,7 +27,6 @@ public class Ouvidoria {
     public long getId() {
         return this.id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -35,7 +34,6 @@ public class Ouvidoria {
     public Cliente getCliente() {
         return this.cliente;
     }
-
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
@@ -43,11 +41,7 @@ public class Ouvidoria {
     public String getMensagem() {
         return this.mensagem;
     }
-
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }
-
-
-
 }

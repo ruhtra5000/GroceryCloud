@@ -13,7 +13,6 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.Funcionari
 */
 
 public interface IColecaoFuncionario {
-
     void adicionar(Funcionario funcionario);
     void remover(long id) throws FuncionarioNaoEncontradoException;
     void atualizar(long id, String nome, String cpf, String telefone, String email, String senha, int tipoAcesso) throws FuncionarioNaoEncontradoException;
@@ -22,6 +21,5 @@ public interface IColecaoFuncionario {
     Funcionario listarPorCpf(String cpf) throws CpfNaoEncontradoException;
     List<Funcionario> listarTodos();
     List<Funcionario> listarPorNome(String nome) throws NomeNaoEncontradoException;
-
 } 
     

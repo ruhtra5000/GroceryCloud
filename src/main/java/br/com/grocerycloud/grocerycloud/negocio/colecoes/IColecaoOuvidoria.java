@@ -7,19 +7,17 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEnc
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.OuvidoriaNaoEncontradaException;
 
 /** 
- * Esta classe implementa o contrato de uma Ouvidoria, estabelecendo 
- * os métodos que devem ser executados pela classe de negocio de Ouvidoria
+ * Esta classe implementa o contrato de uma ouvidoria, estabelecendo 
+ * os métodos que devem ser executados pela classe de negocio de ouvidoria
  * @author Victor Cauã Tavares Inácio
  * @category Interface de negócio
 */
 
 public interface IColecaoOuvidoria {
-
     void adicionar(Ouvidoria ouvidoria);
 
-    Ouvidoria listarPorId(long id) throws OuvidoriaNaoEncontradaException;
     List<Ouvidoria> listarTodos();
+    Ouvidoria listarPorId(long id) throws OuvidoriaNaoEncontradaException;
     List<Ouvidoria> listarPorCliente(Cliente cliente) throws ClienteNaoEncontradoException;
-
 } 
     

@@ -12,9 +12,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Ouvidoria;
 */
 
 @Service
-
 public class FachadaCliente {
-
     @Autowired
     private IColecaoOuvidoria colecaoOuvidoria;
 
@@ -23,7 +21,6 @@ public class FachadaCliente {
      * @author Victor Cauã Tavares InácioS
     */
     //OUVIDORIA
-
     public void adicionarOuvidoria(long Idcliente, String mensagem){ //INCOMPLETO
 
     }
