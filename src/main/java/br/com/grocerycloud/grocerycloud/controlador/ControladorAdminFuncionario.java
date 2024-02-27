@@ -24,98 +24,82 @@ import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 @RequestMapping("/admin/funcionario")
 
 public class ControladorAdminFuncionario {
-
     @Autowired
     private FachadaGerente fachadaGerente;
 
     @GetMapping("/")
     public ModelAndView homeAdminFuncionario() {
-    
-        ModelAndView Mv = new ModelAndView("/admin/funcionario/funcionario");
-        Mv.addObject("funcionarios", fachadaGerente.listarFuncionarios());
+        ModelAndView mv = new ModelAndView("/admin/funcionario/funcionario");
+        mv.addObject("funcionarios", fachadaGerente.listarFuncionarios());
 
-        return Mv;
+        return mv;
     }
 
     @GetMapping("/adicionar")
     public ModelAndView adicionarFuncionario() {
-    
-        ModelAndView Mv = new ModelAndView("/admin/funcionario/adicionarfuncionario");
-
-        return Mv;
-    
+        ModelAndView mv = new ModelAndView("/admin/funcionario/adicionarfuncionario");
+        return mv;
     }
     
     @PostMapping("/adicionar")
     public ModelAndView adicionarFuncionarioFunction(RequisicaoAdicionarFuncionario r) {
-
-        ModelAndView Mv = new ModelAndView("redirect:/admin/funcionario/");
-
         fachadaGerente.adicionarFuncionario(r.getNome(), r.getCpf(), r.getTelefone(), r.getEmail(), r.getSenha(), r.getTipoAcesso());
-
-        return Mv;
-    
+        
+        ModelAndView mv = new ModelAndView("redirect:/admin/funcionario/");
+        return mv;
     }
 
     @GetMapping("/cpf/{cpf}")
     public ModelAndView buscarFuncionarioPorCpf(@PathVariable("cpf")String cpf) {
-    
-        ModelAndView Mv = new ModelAndView("/admin/funcionario/funcionario");
+        ModelAndView mv = new ModelAndView("/admin/funcionario/funcionario");
         try{
-        Mv.addObject("funcionarios", fachadaGerente.buscarFuncionarioPorCpf(cpf));
+            mv.addObject("funcionarios", fachadaGerente.buscarFuncionarioPorCpf(cpf));
         }
         catch(CpfNaoEncontradoException err){
-             Mv.setViewName("geral/erro");
-             Mv.addObject("erro", err.getMessage());   
+             mv.setViewName("geral/erro");
+             mv.addObject("erro", err.getMessage());   
         }
-        return Mv;
+        return mv;
     
     }
 
     @GetMapping("/nome/{nome}")
     public ModelAndView buscarFuncionarioPorNome(@PathVariable("nome")String nome) {
-    
-        ModelAndView Mv = new ModelAndView("/admin/funcionario/funcionario");
+        ModelAndView mv = new ModelAndView("/admin/funcionario/funcionario");
         try{
-        Mv.addObject("funcionarios", fachadaGerente.buscarFuncionarioPorNome(nome));
+            mv.addObject("funcionarios", fachadaGerente.buscarFuncionarioPorNome(nome));
         }
         catch(NomeNaoEncontradoException err){
-             Mv.setViewName("geral/erro");
-             Mv.addObject("erro", err.getMessage());   
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());   
         }
-        return Mv;
-    
+        return mv;
     }
 
     @GetMapping("/atualizar/{cpf}")
     public ModelAndView atualizarFuncionario(@PathVariable("cpf")String cpf) {
-    
-        ModelAndView Mv = new ModelAndView("/admin/funcionario/editarfuncionario");
+        ModelAndView mv = new ModelAndView("/admin/funcionario/editarfuncionario");
         try{
-        Mv.addObject("funcionario", fachadaGerente.buscarFuncionarioPorCpf(cpf));
+            mv.addObject("funcionario", fachadaGerente.buscarFuncionarioPorCpf(cpf));
         }
         catch(CpfNaoEncontradoException err){
-             Mv.setViewName("geral/erro");
-             Mv.addObject("erro", err.getMessage());   
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());   
         }
-        return Mv;
-    
+        return mv;
     }
 
     @PostMapping("/atualizar")
       public ModelAndView atualizarFuncionarioFunction(RequisicaoAdicionarFuncionario r) {
-    
-        ModelAndView Mv = new ModelAndView("redirect:/admin/funcionario/");
+        ModelAndView mv = new ModelAndView("redirect:/admin/funcionario/");
         try{
-        fachadaGerente.atualizarFuncionario(r.getId(), r.getNome(), r.getCpf(), r.getTelefone(), r.getEmail(), r.getSenha(), r.getTipoAcesso());
+            fachadaGerente.atualizarFuncionario(r.getId(), r.getNome(), r.getCpf(), r.getTelefone(), r.getEmail(), r.getSenha(), r.getTipoAcesso());
         }
         catch(FuncionarioNaoEncontradoException err){
-             Mv.setViewName("geral/erro");
-             Mv.addObject("erro", err.getMessage());   
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());   
         }
-        return Mv;
-
+        return mv;
     }
-
 
 }
