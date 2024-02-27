@@ -14,14 +14,12 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.OuvidoriaNaoE
 /**
  * Esta classe implementa as ações e as regras de negocio relacionadas a uma
  * Ouvidoria.
- * 
  * @author Victor Cauã Tavares Inácio
  * @category Classe de negocio da aplicação
  */
 
 @Service
 public class NegocioOuvidoria implements IColecaoOuvidoria {
-
     @Autowired
     private IRepositorioOuvidoria repositorioOuvidoria;
 
@@ -33,32 +31,22 @@ public class NegocioOuvidoria implements IColecaoOuvidoria {
     @Override
     public Ouvidoria listarPorId(long id) throws OuvidoriaNaoEncontradaException {
         Ouvidoria ouvidoria = repositorioOuvidoria.findById(id);
-		
 		if (ouvidoria == null)
-			throw new OuvidoriaNaoEncontradaException();
-				
+			throw new OuvidoriaNaoEncontradaException();	
 		return ouvidoria;
-
     }
 
     @Override
     public List<Ouvidoria> listarPorCliente(Cliente cliente) throws ClienteNaoEncontradoException {
-
         List<Ouvidoria> ouvidoria = repositorioOuvidoria.findAllByCliente(cliente);
-		
 		if (ouvidoria.isEmpty())
 			throw new ClienteNaoEncontradoException();
-		
 		return ouvidoria;  
-
-
     }
 
     @Override
     public List<Ouvidoria> listarTodos() {
-
         return repositorioOuvidoria.findAll();
-
     }
 
 }
