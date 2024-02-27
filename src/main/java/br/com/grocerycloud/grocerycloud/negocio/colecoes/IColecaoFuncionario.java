@@ -21,5 +21,6 @@ public interface IColecaoFuncionario {
     Funcionario listarPorCpf(String cpf) throws CpfNaoEncontradoException;
     List<Funcionario> listarTodos();
     List<Funcionario> listarPorNome(String nome) throws NomeNaoEncontradoException;
+    Funcionario buscarPorCpfESenha(String cpf, String senha);
 } 
     

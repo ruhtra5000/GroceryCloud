@@ -7,30 +7,76 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Funcionario</title>
 </head>
-<body>
-    <h1>funcionarios</h1>
-    <a href="/admin/funcionario/adicionar"><button>adicionarFuncionario</button></a>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">NOME</th>
-                <th scope="col">CPF</th>
-                <th scope="col">EMAIL</th>
-                <th scope="col">TELEFONE</th>
-                <th scope="col">TIPOACESSO</th>
-              </tr>
-        </thead>
-        <tbody>
-            <tr th:each="funcionario: ${funcionarios}">
-                <td th:text="${funcionario.id}"></td>
-                <td th:text="${funcionario.nome}"></td>
-                <td th:text="${funcionario.cpf}"></td>
-                <td th:text="${funcionario.email}"></td>
-                <td th:text="${funcionario.telefone}"></td>
-                <td th:text="${funcionario.tipoAcesso}"></td>
-            </tr>
-        </tbody>
-    </table>
+<body class="m-3">
+    <div class="container">
+        <div class="d-flex">
+            <h1 class="p-2 flex-grow-1">Funcionários</h1>
+            <div class="p-2 align-self-center">
+                <a href="/admin/funcionario/adicionar"><button class="btn btn-success">Registrar funcionário</button></a>
+            </div>
+            
+            <div class="p-2 align-self-center">
+                <div class="input-group">
+                    <button class="btn btn-outline-secondary" id="idButton1" type="button">CPF</button>
+                    <button class="btn btn-outline-secondary" id="idButton2" type="button">NOME</button>                  
+                    <input type="text" class="form-control-sm" name="buscaCampo" id="buscaCampo" placeholder="CPF">
+                    <a href="/admin/funcionario/cpf/" id="rota"><button class="btn btn-primary">Buscar</button></a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Acesso</th>
+                    <th scope="col">Ações</th>
+                  </tr>
+            </thead>
+            <tbody>
+                <tr th:each="funcionario: ${funcionarios}">
+                    <td th:text="${funcionario.id}"></td>
+                    <td th:text="${funcionario.nome}"></td>
+                    <td th:text="${funcionario.cpf}"></td>
+                    <td th:text="${funcionario.email}"></td>
+                    <td th:text="${funcionario.telefone}"></td>
+                    <td th:if="${funcionario.tipoAcesso == 0}">Caixa</td>
+                    <td th:unless="${funcionario.tipoAcesso == 0}">Gerente</td>
+                    <td>
+                        <a th:href="${'/admin/funcionario/atualizar/'+funcionario.cpf}">
+                        <button class="btn btn-warning btn-sm">Editar</button></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
+
+<script>
+    const inputBusca = document.querySelector("#buscaCampo")
+    const botaoRota = document.querySelector("#rota")
+    var rotaBase = "/admin/funcionario/cpf/"
+    
+    document.querySelector('#idButton1').addEventListener("click", () => {
+        rotaBase = "/admin/funcionario/cpf/"
+        inputBusca.setAttribute("placeholder", "CPF")
+        var texto = inputBusca.value
+        botaoRota.setAttribute("href", rotaBase+texto)
+    })
+
+    document.querySelector('#idButton2').addEventListener("click", () => {
+        rotaBase = "/admin/funcionario/nome/"
+        inputBusca.setAttribute("placeholder", "Nome")
+        var texto = inputBusca.value
+        botaoRota.setAttribute("href", rotaBase+texto)
+    })
+
+    inputBusca.addEventListener("input", () => {
+        var texto = inputBusca.value
+        botaoRota.setAttribute("href", rotaBase+texto)
+    })
+</script>
 </html>

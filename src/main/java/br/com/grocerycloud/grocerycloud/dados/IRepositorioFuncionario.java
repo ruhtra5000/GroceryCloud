@@ -15,4 +15,5 @@ public interface IRepositorioFuncionario extends JpaRepository <Funcionario, Lon
 	public Funcionario findById(long id);
 	public List<Funcionario> findAllByNome(String nome);
 	public Funcionario findByCpf(String cpf);
+	public Funcionario findByCpfAndSenha(String cpf, String senha);
 }

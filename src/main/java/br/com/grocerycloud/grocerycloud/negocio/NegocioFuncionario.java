@@ -32,7 +32,7 @@ public class NegocioFuncionario implements IColecaoFuncionario {
     public void remover(long id) throws FuncionarioNaoEncontradoException {
         Funcionario removed = listarPorId(id);
         repositorioFuncionario.delete(removed);
-        }
+    }
 
     @Override
     public void atualizar(long id, String nome, String cpf, String telefone, String email, String senha, int tipoAcesso) throws FuncionarioNaoEncontradoException {
@@ -57,6 +57,11 @@ public class NegocioFuncionario implements IColecaoFuncionario {
     }
 
     @Override
+    public List<Funcionario> listarTodos() {
+        return repositorioFuncionario.findAll();
+    }
+
+    @Override
     public Funcionario listarPorCpf(String cpf) throws CpfNaoEncontradoException {
         Funcionario funcionario = repositorioFuncionario.findByCpf(cpf);
 		if (funcionario == null)
@@ -65,8 +70,8 @@ public class NegocioFuncionario implements IColecaoFuncionario {
     }
 
     @Override
-    public List<Funcionario> listarTodos() {
-        return repositorioFuncionario.findAll();
+    public Funcionario buscarPorCpfESenha(String cpf, String senha) {
+        return repositorioFuncionario.findByCpfAndSenha(cpf, senha);
     }
 
     @Override

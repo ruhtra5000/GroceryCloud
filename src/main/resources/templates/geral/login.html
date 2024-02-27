@@ -15,10 +15,10 @@
     <div class="container">
         <form action="/login" method="post">
             <label for="id1" class="form-label">CPF - Usuário:</label>
-            <input onkeypress="mascara(this, cpf)" type="text" class="form-control" name="" id="id1" maxlength="14"><br><!--Configurar DTO-->
+            <input onkeypress="mascara(this)" type="text" class="form-control" name="cpf" id="id1" maxlength="14"><br>
             
             <label for="id2" class="form-label">Senha:</label>
-            <input type="password" class="form-control" name="" id="id2"><br><!--Configurar DTO-->
+            <input type="password" class="form-control" name="senha" id="id2"><br>
             
             <button type="submit" class="btn btn-primary">Logar</button>
         </form>
@@ -26,13 +26,12 @@
 </body>
 
 <script>
-    function mascara(o,f){
+    function mascara(o){
         v_obj=o
-        v_fun=f
         setTimeout("execmascara()",1)
     }
     function execmascara(){
-        v_obj.value=v_fun(v_obj.value)
+        v_obj.value=cpf(v_obj.value)
     }
     function cpf(v){
         v=v.replace(/\D/g,"")

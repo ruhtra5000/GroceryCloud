@@ -19,7 +19,6 @@ import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
  * @author Victor Cauã Tavares Inácio
  * @category Classe de controlador da aplicação
 */
-
 @Controller
 @RequestMapping("/admin/funcionario")
 
@@ -50,9 +49,9 @@ public class ControladorAdminFuncionario {
     }
 
     @GetMapping("/cpf/{cpf}")
-    public ModelAndView buscarFuncionarioPorCpf(@PathVariable("cpf")String cpf) {
+    public ModelAndView buscarFuncionarioPorCpf(@PathVariable("cpf") String cpf) {
         ModelAndView mv = new ModelAndView("/admin/funcionario/funcionario");
-        try{
+        try {
             mv.addObject("funcionarios", fachadaGerente.buscarFuncionarioPorCpf(cpf));
         }
         catch(CpfNaoEncontradoException err){
@@ -60,13 +59,12 @@ public class ControladorAdminFuncionario {
              mv.addObject("erro", err.getMessage());   
         }
         return mv;
-    
     }
 
     @GetMapping("/nome/{nome}")
-    public ModelAndView buscarFuncionarioPorNome(@PathVariable("nome")String nome) {
+    public ModelAndView buscarFuncionarioPorNome(@PathVariable("nome") String nome) {
         ModelAndView mv = new ModelAndView("/admin/funcionario/funcionario");
-        try{
+        try {
             mv.addObject("funcionarios", fachadaGerente.buscarFuncionarioPorNome(nome));
         }
         catch(NomeNaoEncontradoException err){
@@ -79,7 +77,7 @@ public class ControladorAdminFuncionario {
     @GetMapping("/atualizar/{cpf}")
     public ModelAndView atualizarFuncionario(@PathVariable("cpf")String cpf) {
         ModelAndView mv = new ModelAndView("/admin/funcionario/editarfuncionario");
-        try{
+        try {
             mv.addObject("funcionario", fachadaGerente.buscarFuncionarioPorCpf(cpf));
         }
         catch(CpfNaoEncontradoException err){
@@ -92,7 +90,7 @@ public class ControladorAdminFuncionario {
     @PostMapping("/atualizar")
       public ModelAndView atualizarFuncionarioFunction(RequisicaoAdicionarFuncionario r) {
         ModelAndView mv = new ModelAndView("redirect:/admin/funcionario/");
-        try{
+        try {
             fachadaGerente.atualizarFuncionario(r.getId(), r.getNome(), r.getCpf(), r.getTelefone(), r.getEmail(), r.getSenha(), r.getTipoAcesso());
         }
         catch(FuncionarioNaoEncontradoException err){
