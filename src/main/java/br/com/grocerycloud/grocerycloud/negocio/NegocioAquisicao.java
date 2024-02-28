@@ -8,14 +8,18 @@ import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
 
 import java.util.List;
 
-/** 
- * Esta classe implementa as ações e as regras de negocio relacionadas a uma aquisição.
+/**
+ * Esta classe implementa as ações e as regras de negocio relacionadas a uma
+ * aquisição.
+ * 
  * @author Arthur de Sá Tenório
  * @category Classe de negocio da aplicação
-*/
+ */
 
 @Service
 public class NegocioAquisicao implements IColecaoAquisicao {
@@ -35,7 +39,7 @@ public class NegocioAquisicao implements IColecaoAquisicao {
     @Override
     public Aquisicao listarPorId(long id) throws AquisicaoNaoEncontradaException {
         Aquisicao aquisicao = repositorioAquisicao.findById(id);
-        if(aquisicao == null)
+        if (aquisicao == null)
             throw new AquisicaoNaoEncontradaException();
         return aquisicao;
     }
@@ -43,7 +47,7 @@ public class NegocioAquisicao implements IColecaoAquisicao {
     @Override
     public List<Aquisicao> listarPorCNPJ(String cnpj) throws CnpjNaoEncontradoException {
         List<Aquisicao> aquisicoes = repositorioAquisicao.findAllByCnpjFornecedor(cnpj);
-        if(aquisicoes.isEmpty())
+        if (aquisicoes.isEmpty())
             throw new CnpjNaoEncontradoException();
         return aquisicoes;
     }

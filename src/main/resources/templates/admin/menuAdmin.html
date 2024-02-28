@@ -1,52 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Menu - Gerência</title>
-</head>
-<body class="m-3">
+  </head>
+  <body class="m-3">
     <div class="d-flex justify-content-center mb-3">
-        <h1>Menu - Gerência</h1>
+      <h1>Menu - Gerência</h1>
     </div>
     <div class="row">
-        <div class="card col-3 mx-1" style="width: 15rem;">
-            <div class="d-flex justify-content-center mt-3">
-                <img src="#" class="card-img-top" alt="icone estoque">
-            </div>
-            <hr>
-            <div class="card-body">
-                <h5 class="card-title">Estoque</h5>
-                <p class="card-text">Visualizar produtos e manipular seus dados.</p>
-                <a href="#" class="btn btn-primary">Ver estoque</a>
-            </div>
+      <div class="card col-3 mx-1" style="width: 15rem">
+        <div class="d-flex justify-content-center mt-3">
+          <img
+            th:src="@{/imagens/iconeEstoque.png}"
+            height="100"
+            width="100"
+            alt="icone estoque"
+          />
         </div>
+        <hr />
+        <div class="card-body">
+          <h5 class="card-title">Produtos</h5>
+          <p class="card-text">Visualizar produtos e manipular seus dados.</p>
+          <a href="/admin/estoque/" class="btn btn-primary">Estoque</a>
+          <a href="/admin/estoque/avariados" class="btn btn-secondary"
+            >Avariados</a
+          >
+        </div>
+      </div>
 
-        <div class="card col-3 mx-1" style="width: 15rem;">
-            <div class="d-flex justify-content-center mt-3">
-                <img th:src="@{/imagens/iconeVenda.png}" height="100" width="100" alt="icone vendas">
-            </div>
-            <hr>
-            <div class="card-body">
-                <h5 class="card-title">Vendas</h5>
-                <p class="card-text">Dados sobre as vendas previamente realizadas pelo estabelecimento.</p>
-                <a href="/admin/venda/" class="btn btn-primary">Ver vendas</a>
-            </div>
+      <div class="card col-3 mx-1" style="width: 15rem">
+        <div class="d-flex justify-content-center mt-3">
+          <img
+            th:src="@{/imagens/iconeVenda.png}"
+            height="100"
+            width="100"
+            alt="icone vendas"
+          />
         </div>
-        
-        <div class="card col-3 mx-1" style="width: 15rem;">
-            <div class="d-flex justify-content-center mt-3">
-                <img th:src="@{/imagens/iconeAquisicao.png}" height="100" width="100" alt="icone aquisicoes">
-            </div>
-            <hr>
-            <div class="card-body">
-                <h5 class="card-title">Aquisições</h5>
-                <p class="card-text">Registros de reabastecimento do supermercado.</p>
-                <a href="/admin/aquisicao/" class="btn btn-primary">Ver aquisições</a>
-            </div>
+        <hr />
+        <div class="card-body">
+          <h5 class="card-title">Vendas</h5>
+          <p class="card-text">
+            Dados sobre as vendas previamente realizadas pelo estabelecimento.
+          </p>
+          <a href="/admin/venda/" class="btn btn-primary">Ver vendas</a>
         </div>
+      </div>
+
+      <div class="card col-3 mx-1" style="width: 15rem">
+        <div class="d-flex justify-content-center mt-3">
+          <img
+            src="https://cdn.discordapp.com/attachments/811044296916205598/1211170551532359711/iconeAquisicao.png?ex=65ed3979&is=65dac479&hm=a151e8314cfa2c0c0fbcc63dec30a14bc01a5064c035ab1ee6d0ccf46f0f711b&"
+            height="100"
+            width="100"
+            alt="icone aquisicoes"
+          />
+        </div>
+        <hr />
+        <div class="card-body">
+          <h5 class="card-title">Aquisições</h5>
+          <p class="card-text">Registros de reabastecimento do supermercado.</p>
+          <a href="/admin/aquisicao/" class="btn btn-primary">Ver aquisições</a>
+        </div>
+      </div>
 
         <div class="card col-3 mx-1" style="width: 15rem;">
             <div class="d-flex justify-content-center mt-3">
@@ -84,6 +109,5 @@
             </div>
         </div>
     </div>
-    
-</body>
+  </body>
 </html>

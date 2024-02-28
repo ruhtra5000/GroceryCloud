@@ -13,12 +13,17 @@ public class ProdutoAvariado {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@ManyToOne
 	private Produto produto;
 
+
 	private int qtdeAvariados;
 	private Date dataAvariado;
+
+	public ProdutoAvariado() {
+
+	}
 
 	public ProdutoAvariado(Produto produto, int qtdeAvariados, Date dataAvariado) {
 		this.produto = produto;
@@ -29,6 +34,7 @@ public class ProdutoAvariado {
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}

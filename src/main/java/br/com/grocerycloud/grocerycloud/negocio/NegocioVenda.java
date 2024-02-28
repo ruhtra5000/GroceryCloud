@@ -9,7 +9,6 @@ import br.com.grocerycloud.grocerycloud.dados.IRepositorioVenda;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
-import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.ProdutoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;

@@ -1,10 +1,9 @@
 package br.com.grocerycloud.grocerycloud.dados;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.ProdutoAvariado;
 
 /**
@@ -19,8 +18,6 @@ public interface IRepositorioProdutoAvariado extends JpaRepository<ProdutoAvaria
 
 	public ProdutoAvariado findById(long id);
 
-	//public List<ProdutoAvariado> findAllByNome(String nome);
-
-	//public List<ProdutoAvariado> findAllByCategoria(String categoria);
+	public ProdutoAvariado findByProduto(Produto produto);
 
 }

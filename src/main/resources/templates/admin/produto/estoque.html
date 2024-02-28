@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <title>Estoque</title>
+  </head>
+
+  <body class="font-jetbrainsmono m-3">
+    <div class="container">
+      <header class="d-flex mb-3">
+        <hgroup class="me-auto">
+          <a href="/admin/" aria-label="goBackLink">
+            <img src="/imagens/back.png" alt="back" aria-label="goBack" />
+          </a>
+
+          <a href="/admin/estoque/">
+            <h1>Estoque</h1>
+          </a>
+        </hgroup>
+
+        <aside class="p-2 wrap">
+          <a href="/admin/estoque/registro">
+            <button class="btn btn-success">Registrar produto</button>
+          </a>
+          <div
+            class="btn-group"
+            role="group"
+            aria-label="Basic radio toggle button group"
+          >
+            <input
+              type="radio"
+              class="btn-check"
+              name="btnradio"
+              id="btnradio1"
+              autocomplete="off"
+              checked
+            />
+            <label class="btn btn-outline-secondary" for="btnradio1">ID</label>
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="btnradio"
+              id="btnradio2"
+              autocomplete="off"
+            />
+            <label class="btn btn-outline-secondary" for="btnradio2"
+              >Nome</label
+            >
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="btnradio"
+              id="btnradio3"
+              autocomplete="off"
+            />
+            <label class="btn btn-outline-secondary" for="btnradio3"
+              >Categoria</label
+            >
+            <input
+              type="text"
+              class="form-control-sm"
+              name="buscaCampo"
+              id="buscaCampo"
+              placeholder="ID"
+              required
+            />
+          </div>
+          <a href="/admin/estoque/id/" id="rota">
+            <button type="button" class="btn btn-primary ms-2">Buscar</button>
+          </a>
+        </aside>
+      </header>
+
+      <main>
+        <table
+          class="table table-striped table-hover table-responsive align-middle mt-2"
+        >
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Produto</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Qtde</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Com desconto</th>
+              <th scope="col-1">Ações</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr th:each="produto: ${produtos}" class="">
+              <td th:text="${produto.id}"></td>
+              <td th:text="${produto.nome}"></td>
+              <td th:text="${produto.categoria}"></td>
+              <td th:text="${produto.qtdeEstoque}"></td>
+              <td th:text="${produto.preco}"></td>
+              <td th:text="${produto.precoDesconto}"></td>
+              <td>
+                <a
+                  th:href="${'/admin/estoque/atualizar/'+produto.id}"
+                  class="btn btn-secondary"
+                  title="editar"
+                >
+                  <img
+                    src="/imagens/editIcon.png"
+                    alt="editar"
+                    style="width: 24px; height: 24px"
+                  />
+                </a>
+                <a
+                  th:href="${'/admin/estoque/avariados/registro/'+produto.id}"
+                  class="btn btn-danger"
+                  title="avariar"
+                >
+                  <img
+                    src="/imagens/damagedIcon.png"
+                    alt="avariar"
+                    style="width: 24px; height: 24px"
+                  />
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+    </div>
+  </body>
+
+  <script>
+    const inputBusca = document.querySelector("#buscaCampo");
+    const botaoRota = document.querySelector("#rota");
+    var rotaBase = "/admin/estoque/id/";
+
+    document.querySelector("#btnradio1").addEventListener("click", () => {
+      rotaBase = "/admin/estoque/id/";
+      inputBusca.setAttribute("placeholder", "ID");
+      var texto = inputBusca.value;
+      botaoRota.setAttribute("href", rotaBase + texto);
+    });
+
+    document.querySelector("#btnradio2").addEventListener("click", () => {
+      rotaBase = "/admin/estoque/nome/";
+      inputBusca.setAttribute("placeholder", "Nome");
+      var texto = inputBusca.value;
+      texto = texto.replace("/", "&");
+      botaoRota.setAttribute("href", rotaBase + texto);
+    });
+
+    document.querySelector("#btnradio3").addEventListener("click", () => {
+      rotaBase = "/admin/estoque/categoria/";
+      inputBusca.setAttribute("placeholder", "Categoria");
+      var texto = inputBusca.value;
+      texto = texto.replace("/", "&");
+      botaoRota.setAttribute("href", rotaBase + texto);
+    });
+
+    inputBusca.addEventListener("input", () => {
+      var texto = inputBusca.value;
+      texto = texto.replace("/", "&");
+      botaoRota.setAttribute("href", rotaBase + texto);
+    });
+
+    botaoRota.addEventListener("click", () => {
+      inputBusca.setAttribute("value", "");
+    });
+  </script>
+</html>
