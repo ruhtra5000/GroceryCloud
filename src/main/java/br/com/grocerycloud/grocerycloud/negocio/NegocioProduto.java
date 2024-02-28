@@ -95,6 +95,11 @@ public class NegocioProduto implements IColecaoProduto {
 		return produtos;
 	}
 
+	@Override
+	public List<Produto> listarPorDesconto() {
+		return repositorioProduto.findAllByPrecoDescontoNot(-1);
+	}
+
 	// Funções produtos
 	@Override
 	public void aplicarDesconto(long id, double novoPreco) throws ProdutoNaoEncontradoException {

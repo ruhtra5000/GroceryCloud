@@ -22,6 +22,10 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.ProdutoAvariado;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.OuvidoriaNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.AvariadoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.CategoriaNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontradoException;
@@ -64,7 +68,7 @@ public class FachadaGerente {
 
         Produto produto = new Produto(nome, categoria, qtde, preco, precoDesconto);
         colecaoProduto.adicionar(produto);
-    };
+    }
 
     public List<Produto> listarProdutos() {
         return colecaoProduto.listarTodos();

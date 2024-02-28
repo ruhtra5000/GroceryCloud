@@ -1,11 +1,15 @@
 package br.com.grocerycloud.grocerycloud.negocio.fachada;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoFuncionario;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoOuvidoria;
+import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoProduto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Ouvidoria;
+import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Usuario;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.login.UsuarioNaoEncontradoException;
 
@@ -17,6 +21,8 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.login.UsuarioNaoEncontr
 
 @Service
 public class FachadaCliente {
+    @Autowired
+    private IColecaoProduto colecaoProduto;
     @Autowired
     private IColecaoOuvidoria colecaoOuvidoria;
     @Autowired
@@ -38,6 +44,17 @@ public class FachadaCliente {
         //}
         throw new UsuarioNaoEncontradoException();
     }
+
+
+    /** 
+     * Métodos relacionados aos produtos em promoção.
+     * @author Arthur de Sá Tenório
+    */
+    public List<Produto> buscarProdutosComDesconto(){
+        return colecaoProduto.listarPorDesconto();
+    }
+
+
 
      /** 
      * Métodos que tangem a ouvidoria, na fachada do cliente.

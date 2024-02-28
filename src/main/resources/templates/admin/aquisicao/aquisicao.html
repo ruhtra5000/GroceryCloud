@@ -9,7 +9,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <title>Aquisições</title>
   </head>
   <body class="m-3">
@@ -70,7 +70,7 @@
             <td th:text="${aquisicao.cnpjFornecedor}"></td>
             <td th:text="${aquisicao.produto.nome}"></td>
             <td th:text="${aquisicao.qtdeProduto}"></td>
-            <td th:text="${aquisicao.custo}">R$</td>
+            <td th:text="${'R$ '+aquisicao.custo}"></td>
             <td th:text="${aquisicao.dataAquisicao}"></td>
           </tr>
         </tbody>

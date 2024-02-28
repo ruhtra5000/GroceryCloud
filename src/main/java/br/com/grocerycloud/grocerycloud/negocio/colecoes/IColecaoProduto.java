@@ -32,6 +32,8 @@ public interface IColecaoProduto {
 
         List<Produto> listarPorCategoria(String categoria) throws CategoriaNaoEncontradaException;
 
+        List<Produto> listarPorDesconto();
+
         // Funções produto
         void aplicarDesconto(long id, double novoPreco) throws ProdutoNaoEncontradoException;
 

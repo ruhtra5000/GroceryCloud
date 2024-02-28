@@ -22,6 +22,7 @@ public class ControladorHome {
     @GetMapping("/")
     public ModelAndView homeGeral() {
         ModelAndView mv = new ModelAndView("geral/index");
+        mv.addObject("produtos", fachadaCliente.buscarProdutosComDesconto());
         return mv;
     }
     
