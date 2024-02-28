@@ -17,6 +17,7 @@ public class ProdutoAvariado {
 	@ManyToOne
 	private Produto produto;
 
+
 	private int qtdeAvariados;
 	private Date dataAvariado;
 
