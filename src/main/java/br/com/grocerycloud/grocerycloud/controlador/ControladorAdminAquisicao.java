@@ -6,8 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.grocerycloud.grocerycloud.controlador.dto.RequisicaoRegistrarAquisicao;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /** 
@@ -30,14 +34,51 @@ public class ControladorAdminAquisicao {
     }
 
     @GetMapping("/registro")
-    public String registroAquisicao() {
-        return "admin/aquisicao/cadastroAquisicao";
+    public ModelAndView registroAquisicao() {
+        ModelAndView mv = new ModelAndView("admin/aquisicao/cadastroAquisicao");
+        return mv;
     }
     
     @PostMapping("/registro")
-    public String postRegistroAquisicao(RequisicaoRegistrarAquisicao a) {
-        fachadaGerente.adicionarAquisicao(a.getCnpjFornecedor(), a.getIdProduto(), 
-        a.getQtdeProduto(), a.getCusto(), a.getDataAquisicao());
-        return "redirect:/admin/aquisicao/";
+    public ModelAndView postRegistroAquisicao(RequisicaoRegistrarAquisicao a) {
+        ModelAndView mv = new ModelAndView("redirect:/admin/aquisicao/");
+        try {
+            fachadaGerente.adicionarAquisicao(a.getCnpjFornecedor(), a.getIdProduto(), 
+            a.getQtdeProduto(), a.getCusto(), a.getDataAquisicao());
+        }
+        catch(ProdutoNaoEncontradoException err){
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());
+        }
+        return mv;
     }
+
+    @GetMapping("/id/{id}")
+    public ModelAndView buscaAquisicaoID(@PathVariable("id") long id) {
+        ModelAndView mv = new ModelAndView("admin/aquisicao/aquisicao");
+        try {
+            mv.addObject("aquisicoes", fachadaGerente.buscarAquisicaoPorId(id));
+        }
+        catch(AquisicaoNaoEncontradaException err){
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());
+        }
+        return mv;
+    }
+
+    @GetMapping("/cnpj/{cnpj}")
+    public ModelAndView buscaAquisicaoCNPJ(@PathVariable("cnpj") String cnpj) {
+        cnpj = cnpj.replace('&', '/');
+        System.out.println("cnpn: " + cnpj);
+        ModelAndView mv = new ModelAndView("admin/aquisicao/aquisicao");
+        try {
+            mv.addObject("aquisicoes", fachadaGerente.buscarAquisicaoPorCnpj(cnpj));
+        }
+        catch(CnpjNaoEncontradoException err){
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());
+        }
+        return mv;
+    }
+
 }

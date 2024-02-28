@@ -6,16 +6,18 @@ import org.springframework.stereotype.Service;
 import br.com.grocerycloud.grocerycloud.dados.IRepositorioAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.AquisicaoNaoEncontradaException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.CnpjNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
 
 import java.util.List;
 
-/** 
- * Esta classe implementa as ações e as regras de negocio relacionadas a uma aquisição.
+/**
+ * Esta classe implementa as ações e as regras de negocio relacionadas a uma
+ * aquisição.
+ * 
  * @author Arthur de Sá Tenório
  * @category Classe de negocio da aplicação
-*/
+ */
 
 @Service
 public class NegocioAquisicao implements IColecaoAquisicao {
@@ -23,7 +25,7 @@ public class NegocioAquisicao implements IColecaoAquisicao {
     private IRepositorioAquisicao repositorioAquisicao;
 
     @Override
-    public void adicionar(Aquisicao aquisicao) { //Atualizar o estoque
+    public void adicionar(Aquisicao aquisicao) {
         repositorioAquisicao.save(aquisicao);
     }
 
@@ -35,15 +37,15 @@ public class NegocioAquisicao implements IColecaoAquisicao {
     @Override
     public Aquisicao listarPorId(long id) throws AquisicaoNaoEncontradaException {
         Aquisicao aquisicao = repositorioAquisicao.findById(id);
-        if(aquisicao == null)
+        if (aquisicao == null)
             throw new AquisicaoNaoEncontradaException();
         return aquisicao;
     }
 
     @Override
     public List<Aquisicao> listarPorCNPJ(String cnpj) throws CnpjNaoEncontradoException {
-        List<Aquisicao> aquisicoes = repositorioAquisicao.findByCnpjFornecedor(cnpj);
-        if(aquisicoes.isEmpty())
+        List<Aquisicao> aquisicoes = repositorioAquisicao.findAllByCnpjFornecedor(cnpj);
+        if (aquisicoes.isEmpty())
             throw new CnpjNaoEncontradoException();
         return aquisicoes;
     }

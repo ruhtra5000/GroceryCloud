@@ -6,8 +6,9 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.ProdutoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.UsuarioSemVendasException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.VendaNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.UsuarioSemVendasException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.VendaNaoEncontradaException;
 
 /** 
  * Esta classe implementa o contrato de uma venda, estabelecendo 
@@ -20,7 +21,7 @@ public interface IColecaoVenda {
     //Instanciação de venda
     void adicionar(Venda venda);
     void adicionarProdutoVenda(Venda venda, ProdutoVenda produtoVenda);
-    void removerProdutoVenda(Venda venda, long idProduto);
+    void removerProdutoVenda(Venda venda, long idProduto) throws ProdutoNaoEncontradoException;
     List<ProdutoVenda> listarProdutosVenda(Venda venda);
     void calcularValorTotal(Venda venda);
     

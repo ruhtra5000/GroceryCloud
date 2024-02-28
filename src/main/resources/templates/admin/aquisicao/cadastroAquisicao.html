@@ -14,7 +14,7 @@
     <div class="container">
         <form action="/admin/aquisicao/registro" method="post">
             <label for="cnpj" class="form-label">CNPJ do fornecedor</label>
-            <input type="text" class="form-control" name="cnpjFornecedor" id="cnpj"><br>
+            <input onkeypress="mascara(this, cnpj)" type="text" class="form-control" name="cnpjFornecedor" id="cnpj" maxlength="18"><br>
     
             <label for="idProd" class="form-label">ID do produto</label>
             <input type="number" class="form-control" name="idProduto" id="idProd"><br>
@@ -28,8 +28,26 @@
             <label for="data" class="form-label">Data da entrega</label>
             <input type="date" class="form-control" name="dataAquisicao" id="data"><br>
     
-            <button class="btn btn-primary">Registrar</button>
+            <button class="btn btn-success">Registrar</button>
         </form>
     </div>
 </body>
+
+<script>
+    function mascara(o,f){
+        v_obj=o
+        v_fun=f
+        setTimeout("execmascara()",1)
+    }
+    function execmascara(){
+        v_obj.value=cnpj(v_obj.value)
+    }
+    function cnpj(v){
+        v=v.replace(/\D/g,"")
+        v=v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5")
+        return v
+    }
+    //02.524.391/0001-79
+</script>
+
 </html>

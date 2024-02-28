@@ -1,5 +1,11 @@
 package br.com.grocerycloud.grocerycloud.controlador.dto;
 
+/** 
+ * Esta classe representa os dados da requisição de registrar uma aquisição.
+ * @author Arthur de Sá Tenório
+ * @category Classe de DTO da aplicação
+*/
+
 public class RequisicaoRegistrarAquisicao {
     private String cnpjFornecedor;
     private long idProduto;

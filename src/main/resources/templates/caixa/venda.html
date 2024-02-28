@@ -20,26 +20,41 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Banana</td>
-                    <td>6</td>
-                    <td>R$1.00</td>
-                  </tr>
+                  <tr th:each="produto : ${produtos}">
+                    <td th:text="${produto.produto.id}"></td>
+                    <td th:text="${produto.produto.nome}"></td>
+                    <td th:text="${produto.quantidade}"></td>
+                    <td th:text="${produto.valorUnit}"></td>
+                </tr>
                 </tbody>
               </table>
         </div>
         <div id="acoes" class="container col-4">
-            <label for="produto" class="form-label">ID do produto:</label>
-            <input type="number" class="form-control" name="idProd" id="produto" min="1"><br>
-
+          <form action="/caixa/venda/add" method="post">
+            <label for="produto" class="form-label">Código do produto:</label>
+            <input type="number" class="form-control" name="id" id="produto" min="1" placeholder="Código"><br>
+  
             <label for="quantidade" class="form-label">Quantidade do produto:</label>
-            <input type="number" class="form-control" name="quantProd" id="quantidade" min="1"><br/>
+            <input type="number" class="form-control" name="quantidade" id="quantidade" min="1" placeholder="Quantidade"><br/>
             
-            <button type="button" class="btn btn-success">Adicionar produto</button><br/>
-            <button type="button" class="btn btn-danger">Remover produto</button><br/>
-            <button type="button" class="btn btn-primary">Finalizar venda</button><br/>
-            <button type="button" class="btn btn-secondary">Cancelar venda</button>
+            <button type="submit" class="btn btn-success">Adicionar produto</button><br>
+          </form>
+          <hr>
+          <form action="/caixa/venda/remove" method="post">
+            <label for="idRemocao" class="form-label">Código para remoção:</label>
+            <input type="number" class="form-control" name="idRemocao" id="idRemocao" min="1" placeholder="Código para remoção"><br/>
+            <button type="submit" class="btn btn-danger">Remover produto</button><br>
+          </form>
+          <hr>
+          <div class="d-flex justify-content-around">
+            <a href="/caixa/venda/fechar"><button type="button" class="btn btn-primary p-2 me-1 flex-fill align-self-center">Finalizar venda</button></a>
+            <a href="/caixa/venda/cancelar"><button type="button" class="btn btn-secondary p-2 ms-1 flex-fill align-self-center">Cancelar venda</button></a>
+          </div>
+          <hr>
+          <div class="d-flex">
+            <h3 class="p-2 align-self-center">Valor total: R$</h3>
+            <h3 class="p-2 align-self-center" th:text="${valorTotal}"></h3>
+          </div>
         </div>
     </div>
 </body>
