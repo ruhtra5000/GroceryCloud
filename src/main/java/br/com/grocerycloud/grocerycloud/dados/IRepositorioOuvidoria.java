@@ -13,6 +13,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Ouvidoria;
 
 @Repository
 public interface IRepositorioOuvidoria extends JpaRepository <Ouvidoria, Long> {
+	public List<Ouvidoria> findAllByOrderById();
 	public Ouvidoria findById(long id);
 	public List<Ouvidoria> findAllByCliente(Cliente cliente);
 }

@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.grocerycloud.grocerycloud.controlador.dto.RequisicaoRegistrarAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjInvalidoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
@@ -49,6 +50,10 @@ public class ControladorAdminAquisicao {
         catch(ProdutoNaoEncontradoException err){
             mv.setViewName("geral/erro");
             mv.addObject("erro", err.getMessage());
+        }
+        catch(CnpjInvalidoException err2){
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err2.getMessage());
         }
         return mv;
     }

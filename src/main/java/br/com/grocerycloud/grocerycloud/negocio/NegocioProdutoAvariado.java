@@ -34,7 +34,7 @@ public class NegocioProdutoAvariado implements IColecaoProdutoAvariado {
     @Override
     public List<ProdutoAvariado> listarTodos() {
 
-        List<ProdutoAvariado> produtos = repositorioProdutoAvariado.findAll();
+        List<ProdutoAvariado> produtos = repositorioProdutoAvariado.findAllByOrderById();
 
         return produtos;
     }

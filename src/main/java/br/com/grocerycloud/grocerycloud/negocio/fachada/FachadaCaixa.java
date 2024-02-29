@@ -93,7 +93,7 @@ public class FachadaCaixa {
         colecaoVenda.calcularValorTotal(vendaTemporaria);
     }
 
-    public void fecharVenda() throws ProdutoNaoEncontradoException{ 
+    public void fecharVenda() throws ProdutoNaoEncontradoException{ //Dar desconto (vinculo)
         Produto p;
         colecaoVenda.adicionar(vendaTemporaria); //Linha sem funcionar (cliente e funcionario nulos)
         for(var elem : vendaTemporaria.getProdutosVenda()){

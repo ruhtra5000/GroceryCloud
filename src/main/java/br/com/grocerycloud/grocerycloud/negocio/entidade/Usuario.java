@@ -7,6 +7,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 
+/** 
+ * Esta classe representa um usuário qualquer da aplicação,
+ * sendo utilizada pelas classes de Funcionario e Cliente.
+ * @author Arthur de Sá Tenório
+ * @category Entidade básica da aplicação
+*/
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario {

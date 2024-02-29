@@ -46,7 +46,7 @@ public class NegocioOuvidoria implements IColecaoOuvidoria {
 
     @Override
     public List<Ouvidoria> listarTodos() {
-        return repositorioOuvidoria.findAll();
+        return repositorioOuvidoria.findAllByOrderById();
     }
 
 }
