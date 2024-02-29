@@ -12,7 +12,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 
 @Repository
 public interface IRepositorioProduto extends JpaRepository <Produto, Long> {
-	
+	public List<Produto> findAllByOrderById();
 	public Produto findById(long id);
 	public List<Produto> findAllByNome(String nome);
 	public List<Produto> findAllByCategoria(String categoria);

@@ -5,6 +5,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/** 
+ * Esta classe representa um produto de qualquer natureza
+ * que será comercializado através do Grocery Cloud.
+ * @author Guilherme Paes Cavalcanti
+ * @category Entidade básica da aplicação
+*/
+
 @Entity
 public class Produto {
     @Id

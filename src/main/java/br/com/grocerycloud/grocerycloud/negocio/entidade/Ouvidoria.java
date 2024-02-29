@@ -5,6 +5,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
+/** 
+ * Esta classe representa uma instância de uso da ouvidoria,
+ * a qual contem uma mensagem para os adminstradores do negócio. 
+ * @author Victor Cauã Tavares Inácio
+ * @category Entidade básica da aplicação
+*/
+
 @Entity
 public class Ouvidoria {
     @Id

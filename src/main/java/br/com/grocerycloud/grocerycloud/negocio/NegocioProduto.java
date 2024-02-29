@@ -68,10 +68,7 @@ public class NegocioProduto implements IColecaoProduto {
 
 	@Override
 	public List<Produto> listarTodos() {
-
-		List<Produto> produtos = repositorioProduto.findAll();
-
-		return produtos;
+		return repositorioProduto.findAllByOrderById();
 	}
 
 	@Override
