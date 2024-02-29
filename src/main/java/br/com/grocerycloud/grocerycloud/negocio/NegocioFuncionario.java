@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import br.com.grocerycloud.grocerycloud.dados.IRepositorioFuncionario;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoFuncionario;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.*;
 
 /**
  * Esta classe implementa as ações e as regras de negocio relacionadas a um
@@ -75,10 +73,10 @@ public class NegocioFuncionario implements IColecaoFuncionario {
     }
 
     @Override
-    public List<Funcionario> listarPorNome(String nome) throws NomeNaoEncontradoException {
+    public List<Funcionario> listarPorNome(String nome) throws NomeFuncionarioNaoEncontradoException {
         List<Funcionario> funcionario = repositorioFuncionario.findAllByNome(nome);
 		if (funcionario.isEmpty())
-			throw new NomeNaoEncontradoException();
+			throw new NomeFuncionarioNaoEncontradoException();
 		return funcionario;  
     }
 }

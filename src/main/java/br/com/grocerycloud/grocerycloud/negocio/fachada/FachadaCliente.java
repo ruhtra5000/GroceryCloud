@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoFuncionario;
+import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoCliente;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoOuvidoria;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoProduto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Ouvidoria;
@@ -26,23 +26,19 @@ public class FachadaCliente {
     @Autowired
     private IColecaoOuvidoria colecaoOuvidoria;
     @Autowired
-    private IColecaoFuncionario colecaoFuncionario;
+    private IColecaoCliente colecaoCliente;
 
     /** 
      * Método que realiza o login.
      * @author Arthur de Sá Tenório
     */
     public Usuario buscarUsuario(String cpf, String senha) throws UsuarioNaoEncontradoException {
-        Usuario usuario = colecaoFuncionario.buscarPorCpfESenha(cpf, senha);
-        if(usuario != null){
+        Usuario usuario = colecaoCliente.buscarPorCpfESenha(cpf, senha);
+        if(usuario != null) {
             return usuario;
+        } else {
+            throw new UsuarioNaoEncontradoException();
         }
-
-        //usuario = colecaoCliente.buscarPorCpfESenha(cpf, senha);
-        //if(usuario != null){
-        //    return usuario;                  //INCOMPLETO
-        //}
-        throw new UsuarioNaoEncontradoException();
     }
 
 
