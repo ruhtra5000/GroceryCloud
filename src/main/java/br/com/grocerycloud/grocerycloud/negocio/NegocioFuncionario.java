@@ -8,6 +8,7 @@ import br.com.grocerycloud.grocerycloud.dados.IRepositorioFuncionario;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoFuncionario;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioDuplicadoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontradoException;
 
@@ -24,21 +25,17 @@ public class NegocioFuncionario implements IColecaoFuncionario {
     private IRepositorioFuncionario repositorioFuncionario;
 
     @Override
-    public void adicionar(Funcionario funcionario) {
+    public void adicionar(Funcionario funcionario) throws FuncionarioDuplicadoException{
+        Funcionario buscaCPF = repositorioFuncionario.findByCpf(funcionario.getCpf());
+        if(buscaCPF != null) 
+            throw new FuncionarioDuplicadoException();
         repositorioFuncionario.save(funcionario);
     }
 
     @Override
-    public void remover(long id) throws FuncionarioNaoEncontradoException {
-        Funcionario removed = listarPorId(id);
-        repositorioFuncionario.delete(removed);
-    }
-
-    @Override
-    public void atualizar(long id, String nome, String cpf, String telefone, String email, String senha, int tipoAcesso) throws FuncionarioNaoEncontradoException {
+    public void atualizar(long id, String nome, String telefone, String email, String senha, int tipoAcesso) throws FuncionarioNaoEncontradoException {
         Funcionario funcionario = listarPorId(id);
 		
-		funcionario.setCpf(cpf);
 		funcionario.setNome(nome);
 		funcionario.setTelefone(telefone);
 		funcionario.setEmail(email);

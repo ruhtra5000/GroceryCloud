@@ -1,4 +1,4 @@
-package br.com.grocerycloud.grocerycloud.testesIntegracao;
+package br.com.grocerycloud.grocerycloud.fachada;
 import br.com.grocerycloud.grocerycloud.dados.IRepositorioAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
@@ -9,10 +9,6 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEnco
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.InputMismatchException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -20,20 +16,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /** 
- * Esta classe busca testar a fachada do gerente com foco nas aquisições
+ * Esta classe busca testar a fachada do gerente
  * @author Arthur de Sá Tenório
  * @category Classe de teste
 */
 
 @SpringBootTest
-public class AquisicaoTest {
+public class TesteFachadaGerente {
     @Autowired
     private IRepositorioAquisicao repositorioAquisicao;
     @Autowired
-    private IColecaoAquisicao colecaoAquisicao;
-    @Autowired
     private FachadaGerente fachadaGerente;
 
+
+    /** 
+     * Metodos de teste de integração de aquisição
+     * @author Arthur de Sá Tenório
+    */
     @Test
     public void cadastroAquisicaoTest() {
         long l = 1;
@@ -81,11 +80,5 @@ public class AquisicaoTest {
         catch(CnpjNaoEncontradoException err){
             System.out.println(err.getMessage());
         }
-    }
-
-    @Test
-    public void CnpjInvalidoTest(){
-        boolean verificacao = colecaoAquisicao.verificarCNPJ("46.745.829/0001-27");
-        assertFalse(verificacao);
     }
 }

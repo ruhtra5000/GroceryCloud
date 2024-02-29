@@ -24,6 +24,7 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNao
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjInvalidoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioDuplicadoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.OuvidoriaNaoEncontradaException;
@@ -176,7 +177,7 @@ public class FachadaGerente {
      * @author Victor Cauã Tavares Inácio
     */
     //FUNCIONARIOS
-    public void adicionarFuncionario(String nome, String cpf, String telefone, String email, String senha, int tipoAcesso){
+    public void adicionarFuncionario(String nome, String cpf, String telefone, String email, String senha, int tipoAcesso) throws FuncionarioDuplicadoException{
         Funcionario funcionario = new Funcionario();
 
         funcionario.setCpf(cpf);
@@ -193,12 +194,8 @@ public class FachadaGerente {
         return colecaoFuncionario.listarTodos();
     }
 
-    public void removerFuncionario(long id) throws FuncionarioNaoEncontradoException{
-        colecaoFuncionario.remover(id);
-    }
-
-    public void atualizarFuncionario(long id, String nome, String cpf, String telefone, String email, String senha, int tipoAcesso) throws FuncionarioNaoEncontradoException{
-        colecaoFuncionario.atualizar(id, nome, cpf, telefone, email, senha, tipoAcesso);
+    public void atualizarFuncionario(long id, String nome, String telefone, String email, String senha, int tipoAcesso) throws FuncionarioNaoEncontradoException{
+        colecaoFuncionario.atualizar(id, nome, telefone, email, senha, tipoAcesso);
     }
 
     public Funcionario buscarFuncionarioPorCpf(String Cpf) throws CpfNaoEncontradoException{

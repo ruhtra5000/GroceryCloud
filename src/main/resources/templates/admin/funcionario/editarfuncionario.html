@@ -19,8 +19,7 @@
             <input type="text" class="form-control" name="nome" id="nome" th:value="${funcionario.nome}"><br>
 
             <label for="cpf" class="form-label">CPF:</label>
-            <input onkeypress="mascara1(this)" maxlength="14" placeholder="___.___.___-__" 
-            type="text" class="form-control" name="cpf" id="cpf" th:value="${funcionario.cpf}"><br>
+            <input type="text" class="form-control" name="cpf" id="cpf" th:value="${funcionario.cpf}" disabled><br>
 
             <label for="senha" class="form-label">Senha:</label>
             <input type="password" class="form-control" name="senha" id="senha"  th:value="${funcionario.senha}"><br>
@@ -46,22 +45,6 @@
 </body>
 
 <script>
-    function mascara1(o){
-        v_obj=o
-        setTimeout("execmascara1()",1)
-    }
-    function execmascara1(){
-        v_obj.value=cpf(v_obj.value)
-    }
-    function cpf(v){
-        v=v.replace(/\D/g,"")
-        v=v.replace(/(\d{3})(\d)/,"$1.$2")
-        v=v.replace(/(\d{3})(\d)/,"$1.$2")
-                                                
-        v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
-        return v
-    }
-
     function mascara2(o){
         v_obj=o
         setTimeout("execmascara2()",1)

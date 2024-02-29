@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.grocerycloud.grocerycloud.controlador.dto.RequisicaoAdicionarFuncionario;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioDuplicadoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
@@ -42,9 +43,14 @@ public class ControladorAdminFuncionario {
     
     @PostMapping("/adicionar")
     public ModelAndView adicionarFuncionarioFunction(RequisicaoAdicionarFuncionario r) {
-        fachadaGerente.adicionarFuncionario(r.getNome(), r.getCpf(), r.getTelefone(), r.getEmail(), r.getSenha(), r.getTipoAcesso());
-        
         ModelAndView mv = new ModelAndView("redirect:/admin/funcionario/");
+        try {
+            fachadaGerente.adicionarFuncionario(r.getNome(), r.getCpf(), r.getTelefone(), r.getEmail(), r.getSenha(), r.getTipoAcesso());
+        }
+        catch(FuncionarioDuplicadoException err){
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());   
+        }
         return mv;
     }
 
@@ -91,7 +97,7 @@ public class ControladorAdminFuncionario {
       public ModelAndView atualizarFuncionarioFunction(RequisicaoAdicionarFuncionario r) {
         ModelAndView mv = new ModelAndView("redirect:/admin/funcionario/");
         try {
-            fachadaGerente.atualizarFuncionario(r.getId(), r.getNome(), r.getCpf(), r.getTelefone(), r.getEmail(), r.getSenha(), r.getTipoAcesso());
+            fachadaGerente.atualizarFuncionario(r.getId(), r.getNome(), r.getTelefone(), r.getEmail(), r.getSenha(), r.getTipoAcesso());
         }
         catch(FuncionarioNaoEncontradoException err){
             mv.setViewName("geral/erro");
