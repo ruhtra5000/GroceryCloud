@@ -9,7 +9,7 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.troca.TrocaNaoEncontrad
 import java.util.Date;
 import java.util.List;
 
-public class NegocioTroca implements IColecaoTroca{
+public class NegocioTroca implements IColecaoTroca {
 
     private IRepositorioTroca repositorioTroca;
 
