@@ -16,6 +16,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
 
 @Repository
 public interface IRepositorioAquisicao extends JpaRepository<Aquisicao, Long>{
+    public List<Aquisicao> findAllByOrderById();
     public Aquisicao findById(long id);
     public List<Aquisicao> findAllByCnpjFornecedor(String cnpjFornecedor);
 }

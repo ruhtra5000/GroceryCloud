@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjInvalidoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
 
 /** 
@@ -14,8 +15,10 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncon
 */
 
 public interface IColecaoAquisicao {
-    void adicionar(Aquisicao aquisicao);
+    void adicionar(Aquisicao aquisicao) throws CnpjInvalidoException;
     List<Aquisicao> listarTodos();
     Aquisicao listarPorId(long id) throws AquisicaoNaoEncontradaException;
     List<Aquisicao> listarPorCNPJ(String cnpj) throws CnpjNaoEncontradoException;
+
+    boolean verificarCNPJ(String cnpj);
 } 

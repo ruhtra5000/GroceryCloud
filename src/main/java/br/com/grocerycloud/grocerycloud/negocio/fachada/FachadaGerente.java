@@ -21,6 +21,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.ProdutoAvariado;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjInvalidoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
@@ -137,7 +138,7 @@ public class FachadaGerente {
      */
     // AQUISIÇÕES
     public void adicionarAquisicao(String cnpjFornecedor, long idProduto, int qtdeProduto,
-            double custo, String dataAquisicao) throws ProdutoNaoEncontradoException {
+            double custo, String dataAquisicao) throws ProdutoNaoEncontradoException, CnpjInvalidoException {
         // Buscando produto pelo ID
         Produto produto = listarProdutoPorId(idProduto);
 

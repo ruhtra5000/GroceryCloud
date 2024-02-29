@@ -107,8 +107,10 @@
               <td th:text="${produto.nome}"></td>
               <td th:text="${produto.categoria}"></td>
               <td th:text="${produto.qtdeEstoque}"></td>
-              <td th:text="${produto.preco}"></td>
-              <td th:text="${produto.precoDesconto}"></td>
+              <td th:text="${'R$ '+produto.preco}"></td>
+              <td th:if="${produto.precoDesconto == -1}">Sem desconto</td>
+              <td th:unless="${produto.precoDesconto == -1}" 
+              th:text="${'R$ '+produto.precoDesconto}"></td>
               <td>
                 <a
                   th:href="${'/admin/estoque/atualizar/'+produto.id}"

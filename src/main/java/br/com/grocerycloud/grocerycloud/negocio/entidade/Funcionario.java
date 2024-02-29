@@ -2,6 +2,13 @@ package br.com.grocerycloud.grocerycloud.negocio.entidade;
 
 import jakarta.persistence.Entity;
 
+/** 
+ * Esta classe representa um colaborador contratado
+ * pela empresa que faz uso do Grocery Cloud.
+ * @author Victor Cauã Tavares Inácio
+ * @category Entidade básica da aplicação
+*/
+
 @Entity
 public class Funcionario extends Usuario{
     private String email;

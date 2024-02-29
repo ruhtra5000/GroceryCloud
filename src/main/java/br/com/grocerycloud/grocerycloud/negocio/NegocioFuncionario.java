@@ -58,7 +58,7 @@ public class NegocioFuncionario implements IColecaoFuncionario {
 
     @Override
     public List<Funcionario> listarTodos() {
-        return repositorioFuncionario.findAll();
+        return repositorioFuncionario.findAllByOrderById();
     }
 
     @Override

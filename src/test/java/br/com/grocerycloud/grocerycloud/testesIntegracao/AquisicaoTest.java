@@ -1,20 +1,26 @@
 package br.com.grocerycloud.grocerycloud.testesIntegracao;
 import br.com.grocerycloud.grocerycloud.dados.IRepositorioAquisicao;
-import br.com.grocerycloud.grocerycloud.dados.IRepositorioProduto;
+import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
-import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjInvalidoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.Date;
+import java.util.InputMismatchException;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /** 
- * Esta classe busca testar o repositorio de aquisições
+ * Esta classe busca testar a fachada do gerente com foco nas aquisições
  * @author Arthur de Sá Tenório
  * @category Classe de teste
 */
@@ -23,6 +29,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class AquisicaoTest {
     @Autowired
     private IRepositorioAquisicao repositorioAquisicao;
+    @Autowired
+    private IColecaoAquisicao colecaoAquisicao;
     @Autowired
     private FachadaGerente fachadaGerente;
 
@@ -33,11 +41,51 @@ public class AquisicaoTest {
         long qtdeAquisicoes = repositorioAquisicao.count();
         try {
             fachadaGerente.adicionarAquisicao("91.827.947/0001-26", l, 3, 25.0, "2024-03-21");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (ProdutoNaoEncontradoException err) {
+            System.out.println(err.getMessage());
+        }
+        catch(CnpjInvalidoException err2){
+            System.out.println(err2.getMessage());
         }
 
         long qtdeAquisicoes2 = repositorioAquisicao.count();
         assertEquals(qtdeAquisicoes2, qtdeAquisicoes+1);
+    }
+
+    @Test
+    public void buscarAquisicaoPorIdTest(){
+        long l = 1;
+        long esperado = 2;
+        try {
+            Aquisicao a = fachadaGerente.buscarAquisicaoPorId(l);
+            assertEquals("65.588.276/0001-88", a.getCnpjFornecedor());
+            assertEquals(esperado, a.getProduto().getId());
+            assertEquals(100, a.getCusto());
+            assertEquals(5, a.getQtdeProduto());
+        }
+        catch(AquisicaoNaoEncontradaException err){
+            System.out.println(err.getMessage());
+        }
+    }
+
+    @Test
+    public void buscarAquisicaoPorCNPJTest(){
+        long esperado = 3;
+        try {
+            List<Aquisicao> a = fachadaGerente.buscarAquisicaoPorCnpj("62.323.096/0001-86");
+            assertEquals(esperado, a.get(0).getId());
+            assertEquals(esperado, a.get(0).getProduto().getId());
+            assertEquals(25, a.get(0).getCusto());
+            assertEquals(10, a.get(0).getQtdeProduto());
+        }
+        catch(CnpjNaoEncontradoException err){
+            System.out.println(err.getMessage());
+        }
+    }
+
+    @Test
+    public void CnpjInvalidoTest(){
+        boolean verificacao = colecaoAquisicao.verificarCNPJ("46.745.829/0001-27");
+        assertFalse(verificacao);
     }
 }

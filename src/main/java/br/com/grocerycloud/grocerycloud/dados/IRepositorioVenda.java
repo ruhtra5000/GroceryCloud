@@ -18,6 +18,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 
 @Repository
 public interface IRepositorioVenda extends JpaRepository <Venda, Long> {
+    public List<Venda> findAllByOrderById();
     public Venda findById(long id);
     public List<Venda> findAllByCliente(Cliente cliente);
     public List<Venda> findAllByFuncionario(Funcionario funcionario);
