@@ -11,7 +11,6 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.cliente.ClienteNaoEncon
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.UsuarioSemVendasException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaCliente;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 /** 
