@@ -2,12 +2,17 @@ package br.com.grocerycloud.grocerycloud.controlador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import br.com.grocerycloud.grocerycloud.controlador.dto.RequisicaoCriarOuvidoria;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.cliente.ClienteNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.UsuarioSemVendasException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaCliente;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /** 
  * Esta classe representa o controlador de Ouvidoria.
@@ -53,5 +58,42 @@ public class ControladorCliente {
         return mv;
     }
 
+    @GetMapping("/historico")
+    public ModelAndView abrirHistorico() {
+        ModelAndView mv = new ModelAndView("/cliente/abrirHistorico");
+        return mv;
+    }
+
+    @GetMapping("/historico/{cpf}")
+    public ModelAndView visualizarHistorico(@PathVariable("cpf") String cpf) {
+        ModelAndView mv = new ModelAndView("/cliente/historicoVenda");
+        try {
+            mv.addObject("vendas", fachadaCliente.visualizarHistoricoDeCompras(cpf));
+        }
+        catch(CpfNaoEncontradoException|UsuarioSemVendasException err){
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());   
+        }
+        return mv;
+    }
+    
+    @GetMapping("/vinculo")
+    public ModelAndView atualizarVinculo() {
+        ModelAndView mv = new ModelAndView("/cliente/atualizarVinculo");
+        return mv;
+    }
+
+    @GetMapping("/vinculo/{cpf}")
+    public ModelAndView atualizarVinculoFunction(@PathVariable("cpf") String cpf) {
+        ModelAndView mv = new ModelAndView("redirect:/cliente/");
+        try {
+            fachadaCliente.atualizarVinculo(cpf);
+        }
+        catch(CpfNaoEncontradoException|ClienteNaoEncontradoException err){
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());   
+        }
+        return mv;
+    }
     
 }

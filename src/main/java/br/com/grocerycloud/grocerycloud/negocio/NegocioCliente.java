@@ -33,12 +33,13 @@ public class NegocioCliente implements IColecaoCliente{
     }
 
     @Override
-    public void atualizar(long id, String nome, String cpf, String senha) throws ClienteNaoEncontradoException {
+    public void atualizar(long id, String nome, String cpf, String senha, boolean vinculo) throws ClienteNaoEncontradoException {
         Cliente cliente = listarPorId(id);
 
         cliente.setCpf(cpf);
         cliente.setNome(nome);
         cliente.setSenha(senha);
+        cliente.setVinculo(vinculo);
 
         repositorioCliente.save(cliente);
     }
