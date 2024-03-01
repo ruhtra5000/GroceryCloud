@@ -210,7 +210,7 @@ public class FachadaGerente {
         return colecaoFuncionario.listarPorCpf(Cpf);
     }
 
-    public List<Funcionario> buscarFuncionarioPorNome(String Nome) throws NomeNaoEncontradoException, NomeFuncionarioNaoEncontradoException{
+    public List<Funcionario> buscarFuncionarioPorNome(String Nome) throws NomeFuncionarioNaoEncontradoException{
         return colecaoFuncionario.listarPorNome(Nome);
     }
 

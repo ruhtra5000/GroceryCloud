@@ -17,13 +17,12 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.cliente.*;
 
 @Service
 public class NegocioCliente implements IColecaoCliente{
-
     @Autowired
     private IRepositorioCliente repositorioCliente;
 
     @Override
-    public void adicionar(Cliente cliente) {repositorioCliente.save(cliente);
-
+    public void adicionar(Cliente cliente) {
+        repositorioCliente.save(cliente);
     }
 
     @Override

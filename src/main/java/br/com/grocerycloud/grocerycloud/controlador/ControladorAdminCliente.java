@@ -15,7 +15,7 @@ import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
  * @category Classe de controlador da aplicação
  */
 @Controller
-@RequestMapping("/admin/Cliente")
+@RequestMapping("/admin/cliente")
 
 public class ControladorAdminCliente {
     @Autowired

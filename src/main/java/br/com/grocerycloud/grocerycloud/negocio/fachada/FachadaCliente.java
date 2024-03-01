@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.grocerycloud.grocerycloud.negocio.NegocioVenda;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoCliente;
+import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoFuncionario;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoOuvidoria;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoProduto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
@@ -33,6 +34,8 @@ public class FachadaCliente {
     @Autowired
     private IColecaoCliente colecaoCliente;
     @Autowired
+    private IColecaoFuncionario colecaoFuncionario;
+    @Autowired
     private NegocioVenda colecaoVenda;
 
     /** 
@@ -40,12 +43,18 @@ public class FachadaCliente {
      * @author Arthur de Sá Tenório
     */
     public Usuario buscarUsuario(String cpf, String senha) throws UsuarioNaoEncontradoException {
-        Usuario usuario = colecaoCliente.buscarPorCpfESenha(cpf, senha);
-        if(usuario != null) {
+        //Buscando funcionario
+        Usuario usuario = colecaoFuncionario.buscarPorCpfESenha(cpf, senha);
+        if(usuario != null){
             return usuario;
-        } else {
-            throw new UsuarioNaoEncontradoException();
         }
+
+        //Buscando cliente
+        usuario = colecaoCliente.buscarPorCpfESenha(cpf, senha);
+        if(usuario != null){
+            return usuario;
+        }
+        throw new UsuarioNaoEncontradoException();
     }
 
 
