@@ -13,6 +13,8 @@ import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoFuncionario;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoProduto;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoProdutoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoVenda;
+import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
+import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.ProdutoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;

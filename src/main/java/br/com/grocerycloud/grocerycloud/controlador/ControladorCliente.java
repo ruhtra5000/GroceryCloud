@@ -8,6 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.grocerycloud.grocerycloud.controlador.dto.RequisicaoCriarOuvidoria;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.cliente.ClienteNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaCliente;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /** 
  * Esta classe representa o controlador de Ouvidoria.
@@ -17,22 +19,26 @@ import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaCliente;
 
 @Controller
 @RequestMapping("/cliente")
-
 public class ControladorCliente {
-
     @Autowired
     private FachadaCliente fachadaCliente;
+
+    @GetMapping("/")
+    public ModelAndView homeCliente() {
+        ModelAndView mv = new ModelAndView("/cliente/menuCliente");
+        return mv;
+    }
     
     @GetMapping("/ouvidoria")
     public ModelAndView adicionarOuvidoria() {
-        ModelAndView mv = new ModelAndView("/cliente/ouvidoria/");
+        ModelAndView mv = new ModelAndView("/cliente/criarouvidoria");
         return mv;
     }
     
     @PostMapping("/ouvidoria")
     public ModelAndView adicionaroOuvidoriaFunction(RequisicaoCriarOuvidoria r) throws ClienteNaoEncontradoException {
-        ModelAndView mv = new ModelAndView("redirect:/cliente/ouvidoria/");
-            fachadaCliente.criarOuvidoria(r.getId(), r.getMensagem());;
+        ModelAndView mv = new ModelAndView("redirect:/cliente/");     
+        fachadaCliente.criarOuvidoria(r.getId(), r.getMensagem());
         return mv;
     }
 
