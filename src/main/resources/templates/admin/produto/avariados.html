@@ -1,93 +1,108 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <title>Avariados</title>
-  </head>
 
-  <body class="m-3">
-    <div class="container">
-      <header class="d-flex mb-3">
-        <hgroup class="me-auto">
-          <a href="/admin/" aria-label="goBackLink">
-            <img src="/imagens/back.png" alt="back" aria-label="goBack" />
-          </a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <title>Avariados</title>
+</head>
 
-          <a href="/admin/estoque/avariados">
-            <h1>Avariados</h1>
-          </a>
-        </hgroup>
+<body class="m-3">
+  <div class="container">
+    <header class="d-flex mb-3">
+      <hgroup class="me-auto">
+        <a href="/admin/" aria-label="goBackLink">
+          <img src="/imagens/back.png" alt="back" aria-label="goBack" />
+        </a>
 
-        <aside class="p-2 wrap">
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control-sm"
-              name="buscaCampo"
-              id="buscaCampo"
-              placeholder="ID"
-              required
-            />
-            <a href="/admin/avariados/id/" class="btn btn-primary" id="rota">
-              Buscar
-            </a>
-          </div>
-        </aside>
-      </header>
+        <a href="/admin/estoque/avariados">
+          <h1>Avariados</h1>
+        </a>
+      </hgroup>
 
-      <main>
-        <table
-          class="table table-striped table-hover table-responsive align-middle mt-2"
-        >
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Produto</th>
-              <th scope="col">ID produto</th>
-              <th scope="col">Qtde</th>
-              <th scope="col">Data Checagem</th>
-            </tr>
-          </thead>
-          <tbody class="table-group-divider">
-            <tr th:each="avariado: ${avariados}">
-              <td th:text="${avariado.id}"></td>
-              <td th:text="${avariado.produto.nome}"></td>
-              <td th:text="${avariado.produto.id}"></td>
-              <td th:text="${avariado.qtdeAvariados}"></td>
-              <td th:text="${avariado.dataAvariado}"></td>
-            </tr>
-          </tbody>
-        </table>
-      </main>
-    </div>
-  </body>
+      <aside>
+        <div class="input-group mb-3">
+          <button id="btnId" class="btn btn-secondary" type="button">ID</button>
+          <button id="btnIdProduto" class="btn btn-outline-secondary" type="button">ID Produto</button>
+          <input type="text" class="form-control" id="buscaCampo" name="buscaCampo">
+          <a id="rota" href="/admin/avariados/id/" class="btn btn-primary" type="button">Buscar</a>
+        </div>
+      </aside>
 
-  <script>
-    const inputBusca = document.querySelector("#buscaCampo");
-    const botaoRota = document.querySelector("#rota");
-    var rotaBase = "/admin/estoque/avariados/id/";
+    </header>
 
-    inputBusca.addEventListener("input", () => {
-      var texto = inputBusca.value;
-      texto = texto.replace("/", "&");
-      botaoRota.setAttribute("href", rotaBase + texto);
-    });
+    <main>
+      <table class="table table-striped table-hover table-responsive align-middle mt-2">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Produto</th>
+            <th scope="col">ID produto</th>
+            <th scope="col">Qtde</th>
+            <th scope="col">Data Checagem</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr th:each="avariado: ${avariados}">
+            <td th:text="${avariado.id}"></td>
+            <td th:text="${avariado.produto.nome}"></td>
+            <td th:text="${avariado.produto.id}"></td>
+            <td th:text="${avariado.qtdeAvariados}"></td>
+            <td th:text="${avariado.dataAvariado}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+</body>
 
-    botaoRota.addEventListener("click", () => {
-      inputBusca.setAttribute("value", "");
-    });
-  </script>
+<script>
+  var rotaBase = "/admin/estoque/avariados/id/";
+
+  const inputBusca = document.querySelector("#buscaCampo");
+  const botaoRota = document.querySelector("#rota");
+
+  const botaoId = document.querySelector("#btnId");
+  const botaoIdProduto = document.querySelector("#btnIdProduto");
+
+  // Ao digitar no campo de busca
+  inputBusca.addEventListener("input", () => {
+    var texto = inputBusca.value;
+    texto = texto.replace("/", "&");
+    botaoRota.setAttribute("href", rotaBase + texto);
+  });
+
+  // Ao clicar no BOTAO ID
+  botaoId.addEventListener("click", () => {
+    botaoId.setAttribute("class", "btn btn-secondary");
+    botaoIdProduto.setAttribute("class", "btn btn-outline-secondary");
+
+    rotaBase = "/admin/estoque/avariados/id/";
+    var texto = inputBusca.value;
+    botaoRota.setAttribute("href", rotaBase + texto);
+  });
+
+  // Ao clicar no BOTAO ID_PRODUTO
+  botaoIdProduto.addEventListener("click", () => {
+    botaoIdProduto.setAttribute("class", "btn btn-secondary");
+    botaoId.setAttribute("class", "btn btn-outline-secondary");
+
+    rotaBase = "/admin/estoque/avariados/idProduto/";
+    var texto = inputBusca.value;
+    texto = texto.replace("/", "&");
+    botaoRota.setAttribute("href", rotaBase + texto);
+  });
+
+  // Ao clicar no BOTÃO BUSCAR
+  botaoRota.addEventListener("click", () => {
+    inputBusca.setAttribute("value", "");
+  });
+</script>
+
 </html>
