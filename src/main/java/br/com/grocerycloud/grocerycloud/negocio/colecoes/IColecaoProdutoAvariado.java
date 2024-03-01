@@ -6,7 +6,7 @@ import java.util.List;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.ProdutoAvariado;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.AvariadoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.QuantidadeProdutoInsuficienteException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoSemEstoqueException;
 
 /**
  * Interface que representa o contrado dum produto avariado, definindo quais
@@ -18,17 +18,14 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.QuantidadeProd
 
 public interface IColecaoProdutoAvariado {
 
-        List<ProdutoAvariado> listarTodos();
-
         ProdutoAvariado listarPorId(long id) throws AvariadoNaoEncontradoException;
 
         ProdutoAvariado listarPorIdProduto(long id)
                         throws ProdutoNaoEncontradoException, AvariadoNaoEncontradoException;
 
-        List<ProdutoAvariado> listarTodosPorIdProduto(long id)
-                        throws ProdutoNaoEncontradoException, AvariadoNaoEncontradoException;
+        List<ProdutoAvariado> listarTodos();
 
         void avariar(long id, int qtdeAvariados, Date dataChecagem)
-                        throws ProdutoNaoEncontradoException, QuantidadeProdutoInsuficienteException;
+                        throws ProdutoNaoEncontradoException, ProdutoSemEstoqueException;
 
 }

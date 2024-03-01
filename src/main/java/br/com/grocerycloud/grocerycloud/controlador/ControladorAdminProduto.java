@@ -12,7 +12,7 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.CategoriaNaoEn
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoJaRegistradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.QuantidadeProdutoInsuficienteException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoSemEstoqueException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -143,22 +143,6 @@ public class ControladorAdminProduto {
         return mv;
     }
 
-    @GetMapping("/avariados/idProduto/{idProduto}")
-    public ModelAndView buscarProdutoAvariadoIdProduto(@PathVariable("idProduto") long id) {
-        ModelAndView mv = new ModelAndView("admin/produto/avariados");
-        try {
-            mv.addObject("avariados", fachadaGerente.listarProdutosAvariadosPorIdProduto(id));
-        } catch (AvariadoNaoEncontradoException | ProdutoNaoEncontradoException err) {
-            mv.setViewName("geral/erro");
-            mv.addObject("erro", err.getMessage());
-        }
-        return mv;
-    }
-
-    /**
-     * Retorna a página de registro dum produto avariado,
-     * Contendo as informações dum Produto.
-     */
     @GetMapping("/avariados/registro/{id}")
     public ModelAndView registroProdutoAvariado(@PathVariable("id") long id) {
         ModelAndView mv = new ModelAndView("admin/produto/cadastroAvariado");
@@ -171,12 +155,6 @@ public class ControladorAdminProduto {
         return mv;
     }
 
-    /**
-     * Efetua o registro da avariação dum produto, com os dados presentes na rota de
-     * "registroProdutoAvariado".
-     * 
-     * @see registroProdutoAvariado
-     */
     @PostMapping("/avariados/registro")
     public ModelAndView postRegistroProdutoAvariado(RequisicaoRegistrarProdutoAvariado req) {
         ModelAndView mv = new ModelAndView("redirect:/admin/estoque/avariados");
@@ -185,7 +163,7 @@ public class ControladorAdminProduto {
 
             fachadaGerente.adicionarProdutoAvariado(req.getId(), req.getQtdeAvariados(), req.getDataAvariado());
 
-        } catch (ProdutoNaoEncontradoException | QuantidadeProdutoInsuficienteException err) {
+        } catch (ProdutoNaoEncontradoException | ProdutoSemEstoqueException err) {
 
             mv.setViewName("geral/erro");
             mv.addObject("erro", err.getMessage());

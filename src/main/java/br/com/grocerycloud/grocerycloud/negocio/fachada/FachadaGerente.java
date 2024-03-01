@@ -3,13 +3,11 @@ package br.com.grocerycloud.grocerycloud.negocio.fachada;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoAquisicao;
-import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoDashboard;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoCliente;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoFuncionario;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoOuvidoria;
@@ -40,7 +38,7 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.CategoriaNaoEn
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoJaRegistradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.QuantidadeProdutoInsuficienteException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoSemEstoqueException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.troca.TrocaNaoEncontrada;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.VendaNaoEncontradaException;
 
@@ -65,8 +63,6 @@ public class FachadaGerente {
     private IColecaoFuncionario colecaoFuncionario;
     @Autowired
     private IColecaoOuvidoria colecaoOuvidoria;
-    @Autowired
-    private IColecaoDashboard colecaoDashboard;
     @Autowired
     private IColecaoCliente colecaoCliente;
     @Autowired
@@ -115,7 +111,7 @@ public class FachadaGerente {
 
     // PRODUTOS AVARIADOS
     public void adicionarProdutoAvariado(long idProduto, int qtdeAvariados, Date dataChecagem)
-            throws ProdutoNaoEncontradoException, QuantidadeProdutoInsuficienteException {
+            throws ProdutoNaoEncontradoException, ProdutoSemEstoqueException {
         colecaoProdutoAvariado.avariar(idProduto, qtdeAvariados, dataChecagem);
     }
 
@@ -127,9 +123,9 @@ public class FachadaGerente {
         return colecaoProdutoAvariado.listarPorId(id);
     }
 
-    public List<ProdutoAvariado> listarProdutosAvariadosPorIdProduto(long id)
+    public ProdutoAvariado listarProdutoAvariadoPorIdProduto(long id)
             throws ProdutoNaoEncontradoException, AvariadoNaoEncontradoException {
-        return colecaoProdutoAvariado.listarTodosPorIdProduto(id);
+        return colecaoProdutoAvariado.listarPorIdProduto(id);
     }
 
     /**
@@ -184,14 +180,14 @@ public class FachadaGerente {
         return colecaoAquisicao.listarPorCNPJ(cnpj);
     }
 
-    /**
+
+
+    /** 
      * Métodos que tangem os funcionarios, na fachada do gerente.
-     * 
      * @author Victor Cauã Tavares Inácio
-     */
-    // FUNCIONARIOS
-    public void adicionarFuncionario(String nome, String cpf, String telefone, String email, String senha,
-            int tipoAcesso) throws FuncionarioDuplicadoException {
+    */
+    //FUNCIONARIOS
+    public void adicionarFuncionario(String nome, String cpf, String telefone, String email, String senha, int tipoAcesso) throws FuncionarioDuplicadoException{
         Funcionario funcionario = new Funcionario();
 
         funcionario.setCpf(cpf);
@@ -204,16 +200,15 @@ public class FachadaGerente {
         colecaoFuncionario.adicionar(funcionario);
     }
 
-    public List<Funcionario> listarFuncionarios() {
+    public List<Funcionario> listarFuncionarios(){
         return colecaoFuncionario.listarTodos();
     }
 
-    public void atualizarFuncionario(long id, String nome, String telefone, String email, String senha, int tipoAcesso)
-            throws FuncionarioNaoEncontradoException {
+    public void atualizarFuncionario(long id, String nome, String telefone, String email, String senha, int tipoAcesso) throws FuncionarioNaoEncontradoException{
         colecaoFuncionario.atualizar(id, nome, telefone, email, senha, tipoAcesso);
     }
 
-    public Funcionario buscarFuncionarioPorCpf(String Cpf) throws CpfNaoEncontradoException {
+    public Funcionario buscarFuncionarioPorCpf(String Cpf) throws CpfNaoEncontradoException{
         return colecaoFuncionario.listarPorCpf(Cpf);
     }
 
@@ -221,21 +216,22 @@ public class FachadaGerente {
         return colecaoFuncionario.listarPorNome(Nome);
     }
 
-    /**
+
+
+    /** 
      * Métodos que tangem a Ouvidoria, na fachada do gerente.
-     * 
      * @author Victor Cauã Tavares Inácio
     */
     //OUVIDORIA
-    public List<Ouvidoria> listarTodos(){
+    List<Ouvidoria> listarTodos(){
         return colecaoOuvidoria.listarTodos();
     }
 
-    public Ouvidoria buscarPorId(long id) throws OuvidoriaNaoEncontradaException {
+    public Ouvidoria buscarPorId(long id) throws OuvidoriaNaoEncontradaException{
         return colecaoOuvidoria.listarPorId(id);
     }
 
-    public List<Ouvidoria> buscarPorCliente(Cliente cliente) throws ClienteNaoEncontradoException{
+    List<Ouvidoria> buscarPorCliente(Cliente cliente) throws ClienteNaoEncontradoException{
         return colecaoOuvidoria.listarPorCliente(cliente);
     }
 
@@ -268,32 +264,6 @@ public class FachadaGerente {
         return colecaoTroca.buscarPorId(id);
     }
 
-
-    /**
-     * Métodos que tangem a Dashboard, na fachada do gerente.
-     * 
-     * @author Guilherme Paes Cavalcanti
-     */
-
-    // DASHBOARD
-    public long obterQtdeTotalAvariados() {
-        return colecaoDashboard.getQtdeTotalAvariados();
-    }
-
-    public List<Map<String, Object>> obterProdutoMaisAvariado() {
-        return colecaoDashboard.getProdutoMaisAvariado();
-    }
-
-    public double obterCustoTotalAquisicoes() {
-        return colecaoDashboard.getCustoTotalAquisicoes();
-    }
-
-    public List<Map<String, Object>> obterProdutoMaisAdquirido() {
-        return colecaoDashboard.getProdutoMaisAdquirido();
-    }
-    
-    public List<Map<String, Object>> obterAquisicoesAgrupadas() {
-        return colecaoDashboard.getAquisicoesAgrupadas();
-    }
-
 }
+
+
