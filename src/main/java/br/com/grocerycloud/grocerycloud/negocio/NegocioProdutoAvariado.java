@@ -13,7 +13,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.ProdutoAvariado;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.AvariadoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoSemEstoqueException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.QuantidadeProdutoInsuficienteException;
 
 /**
  * Classe que implementa os métodos requisitados no contrato dum produto
@@ -65,15 +65,31 @@ public class NegocioProdutoAvariado implements IColecaoProdutoAvariado {
     }
 
     @Override
+    public List<ProdutoAvariado> listarTodosPorIdProduto(long id)
+            throws ProdutoNaoEncontradoException, AvariadoNaoEncontradoException {
+        Produto produto = repositorioProduto.findById(id);
+        if (produto == null)
+            throw new ProdutoNaoEncontradoException();
+
+            List<ProdutoAvariado> avariados = repositorioProdutoAvariado.findAllByProduto(produto);
+        if (avariados.isEmpty())
+            throw new AvariadoNaoEncontradoException();
+
+        return avariados;
+    }
+
+
+
+    @Override
     public void avariar(long idProduto, int qtdeAvariados, Date dataChecagem)
-            throws ProdutoNaoEncontradoException, ProdutoSemEstoqueException {
+            throws ProdutoNaoEncontradoException, QuantidadeProdutoInsuficienteException {
 
         Produto produto = repositorioProduto.findById(idProduto);
         if (produto == null)
             throw new ProdutoNaoEncontradoException();
 
         if (produto.getQtdeEstoque() < qtdeAvariados)
-            throw new ProdutoSemEstoqueException();
+            throw new QuantidadeProdutoInsuficienteException();
 
         Date date = new Date();
         ProdutoAvariado avariado = new ProdutoAvariado(produto, qtdeAvariados, date);
