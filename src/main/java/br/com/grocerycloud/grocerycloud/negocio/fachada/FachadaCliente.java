@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.grocerycloud.grocerycloud.negocio.NegocioVenda;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoCliente;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoFuncionario;
+import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoOuvidoria;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoProduto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Ouvidoria;
