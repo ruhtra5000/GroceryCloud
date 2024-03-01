@@ -3,8 +3,8 @@ import java.util.List;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioDuplicadoException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.NomeFuncionarioNaoEncontradoException;
 
 /** 
  * Esta classe implementa o contrato de um funcionario, estabelecendo 
@@ -20,7 +20,6 @@ public interface IColecaoFuncionario {
     Funcionario listarPorId(long id) throws FuncionarioNaoEncontradoException;
     Funcionario listarPorCpf(String cpf) throws CpfNaoEncontradoException;
     List<Funcionario> listarTodos();
-    List<Funcionario> listarPorNome(String nome) throws NomeNaoEncontradoException;
+    List<Funcionario> listarPorNome(String nome) throws NomeFuncionarioNaoEncontradoException;
     Funcionario buscarPorCpfESenha(String cpf, String senha);
 } 
-    

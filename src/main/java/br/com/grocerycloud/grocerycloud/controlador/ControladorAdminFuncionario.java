@@ -12,7 +12,7 @@ import br.com.grocerycloud.grocerycloud.controlador.dto.RequisicaoAdicionarFunci
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioDuplicadoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.NomeFuncionarioNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 
 /** 
@@ -73,7 +73,7 @@ public class ControladorAdminFuncionario {
         try {
             mv.addObject("funcionarios", fachadaGerente.buscarFuncionarioPorNome(nome));
         }
-        catch(NomeNaoEncontradoException err){
+        catch(NomeFuncionarioNaoEncontradoException err){
             mv.setViewName("geral/erro");
             mv.addObject("erro", err.getMessage());   
         }

@@ -10,6 +10,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioDuplicadoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.NomeFuncionarioNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontradoException;
 
 /**
@@ -72,10 +73,10 @@ public class NegocioFuncionario implements IColecaoFuncionario {
     }
 
     @Override
-    public List<Funcionario> listarPorNome(String nome) throws NomeNaoEncontradoException {
+    public List<Funcionario> listarPorNome(String nome) throws NomeFuncionarioNaoEncontradoException {
         List<Funcionario> funcionario = repositorioFuncionario.findAllByNome(nome);
 		if (funcionario.isEmpty())
-			throw new NomeNaoEncontradoException();
+			throw new NomeFuncionarioNaoEncontradoException();
 		return funcionario;  
     }
 }

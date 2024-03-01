@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import br.com.grocerycloud.grocerycloud.controlador.dto.RequisicaoAbrirVenda;
 import br.com.grocerycloud.grocerycloud.controlador.dto.RequisicaoAdicionarProdutoVenda;
 import br.com.grocerycloud.grocerycloud.controlador.dto.RequisicaoRemoverProdutoVenda;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.ProdutoInsuficienteException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaCaixa;
@@ -33,10 +34,16 @@ public class ControladorCaixa {
     
     @PostMapping("/venda")
     public ModelAndView abrirVenda(RequisicaoAbrirVenda r) {
-        fachadaCaixa.abrirVenda(r.getCpfFuncionario(), r.getCpfCliente());
         ModelAndView mv = new ModelAndView("caixa/venda");
-        mv.addObject("produtos", fachadaCaixa.listarProdutosVenda());
-        mv.addObject("valorTotal", fachadaCaixa.retornarValorTotal());
+        try {
+            fachadaCaixa.abrirVenda(r.getCpfFuncionario(), r.getCpfCliente());
+            mv.addObject("produtos", fachadaCaixa.listarProdutosVenda());
+            mv.addObject("valorTotal", fachadaCaixa.retornarValorTotal());
+        }
+        catch(CpfNaoEncontradoException err){
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());
+        }
         return mv;
     }
 
@@ -48,13 +55,9 @@ public class ControladorCaixa {
             mv.addObject("produtos", fachadaCaixa.listarProdutosVenda());
             mv.addObject("valorTotal", fachadaCaixa.retornarValorTotal());
         }
-        catch(ProdutoNaoEncontradoException err){
+        catch(ProdutoNaoEncontradoException|ProdutoInsuficienteException err){
            mv.setViewName("geral/erro");
            mv.addObject("erro", err.getMessage());
-        }
-        catch(ProdutoInsuficienteException err2){
-           mv.setViewName("geral/erro");
-           mv.addObject("erro", err2.getMessage());
         }
         return mv;
     }
