@@ -78,8 +78,6 @@ public class NegocioProdutoAvariado implements IColecaoProdutoAvariado {
         return avariados;
     }
 
-
-
     @Override
     public void avariar(long idProduto, int qtdeAvariados, Date dataChecagem)
             throws ProdutoNaoEncontradoException, QuantidadeProdutoInsuficienteException {

@@ -51,8 +51,7 @@ public class ControladorAdminProduto {
         ModelAndView mv = new ModelAndView("redirect:/admin/estoque/");
         try {
             fachadaGerente.adicionarProduto(req.getNome(), req.getCategoria(), req.getQtde(),
-                    req.getPreco(),
-                    -1);
+                    req.getPreco());
         } catch (ProdutoJaRegistradoException err) {
             mv.setViewName("geral/erro");
             mv.addObject("erro", err.getMessage());
@@ -155,10 +154,6 @@ public class ControladorAdminProduto {
         return mv;
     }
 
-    /**
-     * Retorna a página de registro dum produto avariado,
-     * Contendo as informações dum Produto.
-     */
     @GetMapping("/avariados/registro/{id}")
     public ModelAndView registroProdutoAvariado(@PathVariable("id") long id) {
         ModelAndView mv = new ModelAndView("admin/produto/cadastroAvariado");
@@ -171,12 +166,6 @@ public class ControladorAdminProduto {
         return mv;
     }
 
-    /**
-     * Efetua o registro da avariação dum produto, com os dados presentes na rota de
-     * "registroProdutoAvariado".
-     * 
-     * @see registroProdutoAvariado
-     */
     @PostMapping("/avariados/registro")
     public ModelAndView postRegistroProdutoAvariado(RequisicaoRegistrarProdutoAvariado req) {
         ModelAndView mv = new ModelAndView("redirect:/admin/estoque/avariados");

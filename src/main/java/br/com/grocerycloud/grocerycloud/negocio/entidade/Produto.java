@@ -25,14 +25,24 @@ public class Produto {
     private double precoDesconto;
 
     public Produto() {
+        this.precoDesconto = -1;
     }
 
-    public Produto(String nome, String categoria, int qtdeEstoque, double preco, double precoDesconto) {
+    public Produto(String nome, String categoria, int qtdeEstoque, double preco) {
+        super();
         this.nome = nome;
         this.categoria = categoria;
         this.qtdeEstoque = qtdeEstoque;
         this.preco = preco;
-        this.precoDesconto = precoDesconto;
+    }
+
+    public Produto(String nome, String categoria, int qtdeEstoque, double preco, double precoDesconto) {
+        super();
+        this.nome = nome;
+        this.categoria = categoria;
+        this.qtdeEstoque = qtdeEstoque;
+        this.preco = preco;
+        this.preco = precoDesconto;
     }
 
     public long getId() {

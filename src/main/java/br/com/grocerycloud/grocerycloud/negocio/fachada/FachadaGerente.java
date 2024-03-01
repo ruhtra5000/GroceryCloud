@@ -79,10 +79,10 @@ public class FachadaGerente {
      */
 
     // PRODUTOS
-    public void adicionarProduto(String nome, String categoria, int qtde, double preco, double precoDesconto)
+    public void adicionarProduto(String nome, String categoria, int qtde, double preco)
             throws ProdutoJaRegistradoException {
 
-        Produto produto = new Produto(nome, categoria, qtde, preco, precoDesconto);
+        Produto produto = new Produto(nome, categoria, qtde, preco);
         colecaoProduto.adicionar(produto);
     }
 
@@ -94,7 +94,7 @@ public class FachadaGerente {
         return colecaoProduto.listarPorId(id);
     }
 
-    public List<Produto> listarProdutoPorNome(String nome) throws NomeNaoEncontradoException {
+    public Produto listarProdutoPorNome(String nome) throws NomeNaoEncontradoException {
         return colecaoProduto.listarPorNome(nome);
     }
 
@@ -275,7 +275,7 @@ public class FachadaGerente {
      * @author Guilherme Paes Cavalcanti
      */
 
-    // DASHBOARD
+    // DADOS P/ DASHBOARD
     public long obterQtdeTotalAvariados() {
         return colecaoDashboard.getQtdeTotalAvariados();
     }

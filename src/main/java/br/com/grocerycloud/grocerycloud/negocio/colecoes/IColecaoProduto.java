@@ -28,7 +28,7 @@ public interface IColecaoProduto {
 
         List<Produto> listarTodos();
 
-        List<Produto> listarPorNome(String nome) throws NomeNaoEncontradoException;
+        Produto listarPorNome(String nome) throws NomeNaoEncontradoException;
 
         List<Produto> listarPorCategoria(String categoria) throws CategoriaNaoEncontradaException;
 
@@ -36,5 +36,7 @@ public interface IColecaoProduto {
 
         // Funções produto
         void aplicarDesconto(long id, double novoPreco) throws ProdutoNaoEncontradoException;
+
+        boolean temDesconto(Produto p);
 
 }
