@@ -24,16 +24,16 @@ public class ControladorAdminCliente {
     @GetMapping("/")
     public ModelAndView homeAdminCliente() {
         ModelAndView mv = new ModelAndView("/admin/cliente/cliente");
-        mv.addObject("funcionarios", fachadaGerente.listarClientes());
+        mv.addObject("cliente", fachadaGerente.listarClientes());
 
         return mv;
     }
 
     @GetMapping("/nome/{nome}")
     public ModelAndView buscarClientePorNome(@PathVariable("nome") String nome) {
-        ModelAndView mv = new ModelAndView("/admin/funcionario/funcionario");
+        ModelAndView mv = new ModelAndView("/admin/cliente/cliente");
         try {
-            mv.addObject("funcionarios", fachadaGerente.buscarClientePorNome(nome));
+            mv.addObject("cliente", fachadaGerente.buscarClientePorNome(nome));
         } catch (NomeClienteNaoEncontradoException err) {
             mv.setViewName("geral/erro");
             mv.addObject("erro", err.getMessage());
