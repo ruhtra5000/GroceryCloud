@@ -63,6 +63,11 @@ public class NegocioVenda implements IColecaoVenda {
         venda.setValorTotal(valorTotal);
     }
 
+    @Override
+    public void darDescontoVinculo(Venda venda) {
+        venda.setValorTotal(venda.getValorTotal()*0.95); 
+    }
+
     //Listagens de venda. Não estão ligados a criação de uma venda.
     @Override
     public List<Venda> listarTodos() {

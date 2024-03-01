@@ -8,12 +8,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoCliente;
+import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoFuncionario;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoProduto;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoProdutoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.ProdutoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.ProdutoInsuficienteException;
 
@@ -31,20 +34,23 @@ public class FachadaCaixa {
     private IColecaoVenda colecaoVenda;
     @Autowired
     private IColecaoProdutoVenda colecaoProdutoVenda;
-    //NECESSÁRIO COLEÇAO DE USUARIOS
+    @Autowired
+    private IColecaoCliente colecaoCliente;
+    @Autowired
+    private IColecaoFuncionario colecaoFuncionario;
 
     //Armazena (temporariamente) a venda que está sendo executada.
     private Venda vendaTemporaria;
     
-    public void abrirVenda(String cpfFuncionario, String cpfCliente){ //INCOMPLETO
-        //Usuario cliente = buscarCliente(id1) -> buscar cliente por id
-        //Usuario funcionario = buscarFunc(id2) -> buscar funcionario por id
+    public void abrirVenda(String cpfFuncionario, String cpfCliente) throws CpfNaoEncontradoException{ //INCOMPLETO
+        Funcionario funcionario = colecaoFuncionario.listarPorCpf(cpfFuncionario);
+        Cliente cliente = colecaoCliente.listarPorCpf(cpfCliente);
         
         //Caso os usuarios em questão sejam encontrados:
             vendaTemporaria = new Venda();
             vendaTemporaria.setDataVenda(new Date());
-            //vendaTemporaria.setCliente(cliente); 
-            //vendaTemporaria.setFuncionario(funcionario);
+            vendaTemporaria.setCliente(cliente); 
+            vendaTemporaria.setFuncionario(funcionario);
             vendaTemporaria.setProdutosVenda(new ArrayList<>(Arrays.asList()));
             vendaTemporaria.setValorTotal(0);
     }
@@ -90,16 +96,23 @@ public class FachadaCaixa {
         colecaoVenda.calcularValorTotal(vendaTemporaria);
     }
 
-    public void fecharVenda() throws ProdutoNaoEncontradoException{ //Dar desconto (vinculo)
+    public void fecharVenda() throws ProdutoNaoEncontradoException{ 
         Produto p;
-        colecaoVenda.adicionar(vendaTemporaria); //Linha sem funcionar (cliente e funcionario nulos)
         for(var elem : vendaTemporaria.getProdutosVenda()){
             colecaoProdutoVenda.adicionar(elem);
+            
+            //Atualizando o estoque
             p = elem.getProduto();
             p.setQtdeEstoque(p.getQtdeEstoque() - elem.getQuantidade());
             colecaoProduto.atualizar(p.getId(), p.getNome(), p.getCategoria(), p.getQtdeEstoque(),
             p.getPreco(), p.getPrecoDesconto());
         }
+
+        //Dar desconto, caso o cliente seja vinculado ao supermercado
+        if(vendaTemporaria.getCliente().getVinculo()){
+            colecaoVenda.darDescontoVinculo(vendaTemporaria);
+        }
+        colecaoVenda.adicionar(vendaTemporaria);
         vendaTemporaria = null;
     }
 
