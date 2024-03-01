@@ -13,6 +13,7 @@ import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoFuncionario;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoOuvidoria;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoProduto;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoProdutoAvariado;
+import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoTroca;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoVenda;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
@@ -20,6 +21,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Ouvidoria;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.ProdutoAvariado;
+import br.com.grocerycloud.grocerycloud.negocio.entidade.Troca;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjInvalidoException;
@@ -36,6 +38,7 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontr
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoJaRegistradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.ProdutoSemEstoqueException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.troca.TrocaNaoEncontrada;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.VendaNaoEncontradaException;
 
 /**
@@ -61,6 +64,8 @@ public class FachadaGerente {
     private IColecaoOuvidoria colecaoOuvidoria;
     @Autowired
     private IColecaoCliente colecaoCliente;
+    @Autowired
+    private IColecaoTroca colecaoTroca;
 
     /**
      * Métodos que tangem os produtos, na fachada do gerente.
@@ -233,6 +238,10 @@ public class FachadaGerente {
         return colecaoOuvidoria.listarPorCliente(cliente);
     }
 
+    /** 
+     * Métodos que tangem a Clientes, na fachada do gerente.
+     * @author João Victor Leite Dos Santos
+    */
     //CLIENTE
     public List<Cliente> listarClientes(){
         return colecaoCliente.listarTodos();
@@ -240,6 +249,22 @@ public class FachadaGerente {
 
     public List<Cliente> buscarClientePorNome(String Nome) throws NomeClienteNaoEncontradoException {
         return colecaoCliente.listarPorNome(Nome);
+    }
+
+    /** 
+     * Métodos que tangem a Trocas, na fachada do gerente.
+     * @author João Victor Leite Dos Santos
+    */
+    //TROCA
+    public void adicionarTroca(ProdutoAvariado produtoAvariado, Date date) {
+        colecaoTroca.adicionarTroca(produtoAvariado, date);
+    }
+    public List<Troca> listarTrocas(){
+        return colecaoTroca.listarTodas();
+    }
+
+    public Troca buscarId(long id) throws TrocaNaoEncontrada {
+        return colecaoTroca.buscarPorId(id);
     }
 
 }
