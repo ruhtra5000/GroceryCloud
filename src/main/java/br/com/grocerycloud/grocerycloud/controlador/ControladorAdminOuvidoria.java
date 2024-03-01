@@ -27,7 +27,6 @@ public class ControladorAdminOuvidoria {
     public ModelAndView homeAdminOuvidoria() {
         ModelAndView mv = new ModelAndView("/admin/ouvidoria/ouvidoria");
         mv.addObject("ouvidoria", fachadaGerente.listarTodos());
-
         return mv;
     }
 
