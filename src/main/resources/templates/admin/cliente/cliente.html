@@ -7,8 +7,20 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <title>Clientes</title>
 </head>
-<body class="m-3">        
-    </div>
+<body class="m-3">
+    <div class="container">
+        <div class="d-flex">
+            <h1 class="p-2 flex-grow-1">Clientes</h1>
+            
+            <div class="p-2 align-self-center">
+                <div class="input-group">
+                    <button class="btn btn-outline-secondary" id="idButton1" type="button">CPF</button>
+                    <button class="btn btn-outline-secondary" id="idButton2" type="button">Nome</button>                  
+                    <input type="text" class="form-control-sm" name="buscaCampo" id="buscaCampo" placeholder="CPF">
+                    <a href="/admin/cliente/cpf/" id="rota"><button class="btn btn-primary">Buscar</button></a>
+                </div>
+            </div>
+        </div>      
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -17,15 +29,17 @@
                     <th scope="col">CPF</th>
                     <th scope="col">Vinculo</th>
                     <th scope="col">ContaAtiva</th>
-                  </tr>
+                </tr>
             </thead>
             <tbody>
-                <tr th:each="Clientes: ${Clientes}">
-                    <td th:text="${Clientes.id}"></td>
-                    <td th:text="${Clientes.nome}"></td>
-                    <td th:text="${Clientes.cpf}"></td>
-                    <td th:text="${Clientes.Vinculo}"></td>
-                    <td th:text="${Clientes.ContaAtiva}"></td>
+                <tr th:each="cliente: ${clientes}">
+                    <td th:text="${cliente.id}"></td>
+                    <td th:text="${cliente.nome}"></td>
+                    <td th:text="${cliente.cpf}"></td>
+                    <td th:if="${cliente.vinculo == true}">Sim</td>
+                    <td th:unless="${cliente.vinculo} == true">Não</td>
+                    <td th:if="${cliente.ContaAtiva == true}">Sim</td>
+                    <td th:unless="${cliente.ContaAtiva} == true">Não</td>
                 </tr>
             </tbody>
         </table>
@@ -35,8 +49,15 @@
 <script>
     const inputBusca = document.querySelector("#buscaCampo")
     const botaoRota = document.querySelector("#rota")
-    var rotaBase = "/admin/cliente/nome/"
+    var rotaBase = "/admin/cliente/cpf/"
     
+    document.querySelector('#idButton1').addEventListener("click", () => {
+        rotaBase = "/admin/cliente/cpf/"
+        inputBusca.setAttribute("placeholder", "CPF")
+        var texto = inputBusca.value
+        botaoRota.setAttribute("href", rotaBase+texto)
+    })
+
     document.querySelector('#idButton2').addEventListener("click", () => {
         rotaBase = "/admin/cliente/nome/"
         inputBusca.setAttribute("placeholder", "Nome")

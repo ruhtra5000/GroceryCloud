@@ -252,6 +252,10 @@ public class FachadaGerente {
         return colecaoCliente.listarPorNome(Nome);
     }
 
+    public Cliente buscarClientePorCpf(String cpf) throws CpfNaoEncontradoException{
+        return colecaoCliente.listarPorCpf(cpf);
+    }
+
     /** 
      * Métodos que tangem a Trocas, na fachada do gerente.
      * @author João Victor Leite Dos Santos
