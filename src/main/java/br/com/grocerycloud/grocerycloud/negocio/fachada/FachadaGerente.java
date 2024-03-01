@@ -235,8 +235,9 @@ public class FachadaGerente {
         return colecaoOuvidoria.listarPorId(id);
     }
 
-    public List<Ouvidoria> buscarPorCliente(Cliente cliente) throws ClienteNaoEncontradoOuvidoriaException{
-        return colecaoOuvidoria.listarPorCliente(cliente);
+    public List<Ouvidoria> buscarPorCliente(String nome) throws ClienteNaoEncontradoOuvidoriaException, NomeClienteNaoEncontradoException{
+        List<Cliente> cliente = colecaoCliente.listarPorNome(nome);
+        return colecaoOuvidoria.listarPorCliente(cliente.get(0));
     }
 
     /** 

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.cliente.NomeClienteNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoOuvidoriaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.OuvidoriaNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
@@ -44,13 +45,13 @@ public class ControladorAdminOuvidoria {
         return mv;
     }
 
-    @GetMapping("/cliente/{cliente}")
-    public ModelAndView listarPorCliente(@PathVariable("cliente") Cliente cliente) {
+    @GetMapping("/cliente/{nome}")
+    public ModelAndView listarPorCliente(@PathVariable("nome") String nome) {
         ModelAndView mv = new ModelAndView("/admin/ouvidoria/ouvidoria");
         try {
-            mv.addObject("ouvidoria", fachadaGerente.buscarPorCliente(cliente));
+            mv.addObject("ouvidoria", fachadaGerente.buscarPorCliente(nome));
         }
-        catch(ClienteNaoEncontradoOuvidoriaException err){
+        catch(ClienteNaoEncontradoOuvidoriaException|NomeClienteNaoEncontradoException err){
             mv.setViewName("geral/erro");
             mv.addObject("erro", err.getMessage());   
         }
