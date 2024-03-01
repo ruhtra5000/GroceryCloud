@@ -24,7 +24,7 @@ public class TesteCliente {
     private Cliente cliente;
     
     @Test
-    public void buscarPorCpfESenha(){
+    public void buscarPorCpfESenhaTest(){
         boolean verificacao;
         cliente.setSenha("12345");
         cliente.setCpf("012.234.456-67");
