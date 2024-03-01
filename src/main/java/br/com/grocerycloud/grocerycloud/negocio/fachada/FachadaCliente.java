@@ -17,6 +17,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Usuario;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.cliente.NomeClienteNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.login.UsuarioNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.cliente.ClienteNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.UsuarioSemVendasException;
 
 /** 
@@ -66,15 +67,22 @@ public class FachadaCliente {
         return colecaoProduto.listarPorDesconto();
     }
 
-
-
+    
      /** 
      * Métodos que tangem a ouvidoria, na fachada do cliente.
      * @author Victor Cauã Tavares Inácio
     */
     //OUVIDORIA
-    public void adicionarOuvidoria(long Idcliente, String mensagem){ //INCOMPLETO
 
+    public void criarOuvidoria(long id, String mensagem) throws ClienteNaoEncontradoException{ 
+
+        Cliente cliente = colecaoCliente.listarPorId(id);
+        if(cliente != null){
+            Ouvidoria ouvidoria = new Ouvidoria(id, cliente, mensagem);
+            colecaoOuvidoria.adicionar(ouvidoria);           }
+        else{
+            throw new ClienteNaoEncontradoException();
+        }
     }
 
     public List<Venda> visualizarHistoricoDeCompras(String nome) throws NomeClienteNaoEncontradoException, UsuarioSemVendasException {
@@ -101,5 +109,5 @@ public class FachadaCliente {
             }
         }
     }
-    
 }
+

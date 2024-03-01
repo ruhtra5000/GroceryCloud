@@ -218,7 +218,7 @@ public class FachadaGerente {
      * @author Victor Cauã Tavares Inácio
     */
     //OUVIDORIA
-    List<Ouvidoria> listarTodos(){
+    public List<Ouvidoria> listarTodos(){
         return colecaoOuvidoria.listarTodos();
     }
 
@@ -226,7 +226,7 @@ public class FachadaGerente {
         return colecaoOuvidoria.listarPorId(id);
     }
 
-    List<Ouvidoria> buscarPorCliente(Cliente cliente) throws ClienteNaoEncontradoException{
+    public List<Ouvidoria> buscarPorCliente(Cliente cliente) throws ClienteNaoEncontradoException{
         return colecaoOuvidoria.listarPorCliente(cliente);
     }
 

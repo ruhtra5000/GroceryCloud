@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Ouvidoria</title>
+</head>
+<body>
+    <h1>Adicionar Nova Ouvidoria</h1>
+    <form action="/cliente/ouvidoria" method="post">
+        <label for="id">ID do Cliente:</label>
+        <input type="text" id="id" name="id" required><br><br>
+        
+        <label for="mensagem">Mensagem:</label><br>
+        <textarea id="mensagem" name="mensagem" rows="4" cols="50" required></textarea><br><br>
+        
+        <input type="submit" value="Adicionar Ouvidoria">
+    </form>
+</body>
+</html>

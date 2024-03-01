@@ -1,6 +1,5 @@
 package br.com.grocerycloud.grocerycloud.fachada;
 import br.com.grocerycloud.grocerycloud.dados.IRepositorioAquisicao;
-import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoAquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Aquisicao;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjInvalidoException;
