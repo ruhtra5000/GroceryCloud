@@ -16,6 +16,7 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Produto;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Usuario;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.cliente.NomeClienteNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.login.UsuarioNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.cliente.ClienteNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.UsuarioSemVendasException;
@@ -91,32 +92,27 @@ public class FachadaCliente {
      * Métodos que tangem a visualização de historico e atualização de vinculo, na fachada do cliente.
      * @author João Victor Leite Dos Santos
     */
-    public List<Venda> visualizarHistoricoDeCompras(String nome) throws NomeClienteNaoEncontradoException, UsuarioSemVendasException {
-        Cliente cliente = (Cliente) colecaoCliente.listarPorNome(nome);
-        if (cliente.getNome().equals(nome)){
-            if (colecaoVenda == null) {
-                throw new UsuarioSemVendasException();
-            } 
-            else if (colecaoVenda != null) {
-                return colecaoVenda.listarPorCliente(cliente);
-            }
-        } 
-        else {
-            throw new NomeClienteNaoEncontradoException();
-        }
-        return null;
+    public List<Venda> visualizarHistoricoDeCompras(String cpf) throws CpfNaoEncontradoException, UsuarioSemVendasException {
+        Cliente cliente = colecaoCliente.listarPorCpf(cpf);
+        List<Venda> lista = colecaoVenda.listarPorCliente(cliente);
+        if (lista.isEmpty()) 
+            throw new UsuarioSemVendasException();
+        return lista;
     }
 
-    public void atualizarVinculo(String nome) throws NomeClienteNaoEncontradoException {
-        Cliente cliente = (Cliente) colecaoCliente.listarPorNome(nome);
-        if (cliente.getNome().equals(nome)){
-            if (cliente.getVinculo() == true){
-                cliente.setVinculo(false);
-            } 
-            else{
-                cliente.setVinculo(true);
-            }
+    public void atualizarVinculo(String cpf) throws CpfNaoEncontradoException, ClienteNaoEncontradoException {
+        Cliente cliente = colecaoCliente.listarPorCpf(cpf);
+        if (cliente == null) 
+            throw new CpfNaoEncontradoException();
+        
+        if(cliente.getVinculo() == true){
+            cliente.setVinculo(false);
         }
+        else {
+            cliente.setVinculo(true);
+        }
+
+        colecaoCliente.atualizar(cliente.getId(), cliente.getNome(), cliente.getCpf(), cliente.getSenha(), cliente.getVinculo());
     }
 }
 

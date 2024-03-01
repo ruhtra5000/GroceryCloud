@@ -15,7 +15,7 @@ import java.util.List;
 public interface IColecaoCliente {
     void adicionar(Cliente cliente);
     void remover(long id) throws ClienteNaoEncontradoException;
-    void atualizar(long id, String nome, String cpf, String senha) throws ClienteNaoEncontradoException;
+    void atualizar(long id, String nome, String cpf, String senha, boolean vinculo) throws ClienteNaoEncontradoException;
 
     Cliente listarPorId(long id) throws ClienteNaoEncontradoException;
     Cliente listarPorCpf(String cpf) throws CpfNaoEncontradoException;
