@@ -11,6 +11,7 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEnco
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioDuplicadoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.NomeFuncionarioNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.NomeNaoEncontradoException;
 
 /**
  * Esta classe implementa as ações e as regras de negocio relacionadas a um
