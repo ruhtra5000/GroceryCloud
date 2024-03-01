@@ -8,7 +8,7 @@ import br.com.grocerycloud.grocerycloud.dados.IRepositorioOuvidoria;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoOuvidoria;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Ouvidoria;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoOuvidoriaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.OuvidoriaNaoEncontradaException;
 
 /**
@@ -37,10 +37,10 @@ public class NegocioOuvidoria implements IColecaoOuvidoria {
     }
 
     @Override
-    public List<Ouvidoria> listarPorCliente(Cliente cliente) throws ClienteNaoEncontradoException {
+    public List<Ouvidoria> listarPorCliente(Cliente cliente) throws ClienteNaoEncontradoOuvidoriaException {
         List<Ouvidoria> ouvidoria = repositorioOuvidoria.findAllByCliente(cliente);
 		if (ouvidoria.isEmpty())
-			throw new ClienteNaoEncontradoException();
+			throw new ClienteNaoEncontradoOuvidoriaException();
 		return ouvidoria;  
     }
 

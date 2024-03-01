@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoOuvidoriaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.OuvidoriaNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 
@@ -22,6 +22,7 @@ import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 public class ControladorAdminOuvidoria {
     @Autowired
     private FachadaGerente fachadaGerente;
+
 
     @GetMapping("/")
     public ModelAndView homeAdminOuvidoria() {
@@ -49,7 +50,7 @@ public class ControladorAdminOuvidoria {
         try {
             mv.addObject("ouvidoria", fachadaGerente.buscarPorCliente(cliente));
         }
-        catch(ClienteNaoEncontradoException err){
+        catch(ClienteNaoEncontradoOuvidoriaException err){
             mv.setViewName("geral/erro");
             mv.addObject("erro", err.getMessage());   
         }

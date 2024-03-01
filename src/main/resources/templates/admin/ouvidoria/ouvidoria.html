@@ -33,11 +33,11 @@
                     </tr>
                 </thead>
                 <tbody id="corpoTabelaOuvidorias">
-                        <tr th:each="ouvidoria : ${ouvidorias}">
-                            <td th:text="${ouvidoria.id}"></td>
-                            <td th:text="${ouvidoria.cliente}"></td>
-                            <td th:text="${ouvidoria.mensagem}"></td>
-                        </tr>
+                    <tr th:each="ouvidoria : ${ouvidoria}">
+                        <td th:text="${ouvidoria.id}"></td>
+                        <td th:text="${ouvidoria.cliente}"></td>
+                        <td th:text="${ouvidoria.mensagem}"></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -60,9 +60,9 @@
         const texto = inputBusca.value.trim();
         if (texto !== "") {
             if (modoBusca === "cliente") {
-                window.location.href = rotaCliente + texto;
+                window.location.href = rotaBase + "cliente/" + texto;
             } else {
-                window.location.href = rotaId + texto;
+                window.location.href = rotaBase + "id/" + texto;
             }
         }
     });
@@ -77,10 +77,9 @@
 
     inputBusca.addEventListener("input", () => {
         var texto = inputBusca.value;
-        document.querySelector("#rotaCliente").setAttribute("href", rotaBase + texto);
-        document.querySelector("#rotaId").setAttribute("href", rotaBase + texto);
-        document.querySelector("#rotaListarTodos").setAttribute("href", rotaBase + texto);
+        document.querySelector("#pesquisarButton").setAttribute("href", rotaBase + texto);
     });
 
 </script>
 </html>
+

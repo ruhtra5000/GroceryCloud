@@ -33,7 +33,7 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEnco
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioDuplicadoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.NomeFuncionarioNaoEncontradoException;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoOuvidoriaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.OuvidoriaNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.AvariadoNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.CategoriaNaoEncontradaException;
@@ -235,7 +235,7 @@ public class FachadaGerente {
         return colecaoOuvidoria.listarPorId(id);
     }
 
-    public List<Ouvidoria> buscarPorCliente(Cliente cliente) throws ClienteNaoEncontradoException{
+    public List<Ouvidoria> buscarPorCliente(Cliente cliente) throws ClienteNaoEncontradoOuvidoriaException{
         return colecaoOuvidoria.listarPorCliente(cliente);
     }
 

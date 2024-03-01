@@ -5,11 +5,11 @@ package br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria;
  * @category Classe de exceção de ouvidoria
 */
 
-public class ClienteNaoEncontradoException extends Exception {
+public class ClienteNaoEncontradoOuvidoriaException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 	
-	public ClienteNaoEncontradoException() {
+	public ClienteNaoEncontradoOuvidoriaException() {
 		super("Cliente não encontrado!");
 	}
 	
