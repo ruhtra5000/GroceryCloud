@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 /** 
- * Esta classe representa o controlador de Ouvidoria.
+ * Esta classe representa o controlador do cliente.
  * @author Victor Cauã Tavares Inácio
  * @category Classe de controlador da aplicação
 */
@@ -57,6 +57,12 @@ public class ControladorCliente {
         fachadaCliente.criarOuvidoria(r.getId(), r.getMensagem());
         return mv;
     }
+
+
+    /** 
+     * Metodos de histórico de venda e atualização de vínculo
+     * @author Arthur de Sá Tenório
+    */
 
     @GetMapping("/historico")
     public ModelAndView abrirHistorico() {
