@@ -29,14 +29,11 @@ public class NegocioProduto implements IColecaoProduto {
 	@Override
 	public void adicionar(Produto produto) throws ProdutoJaRegistradoException {
 
-		List<Produto> busca = repositorioProduto.findAllByNome(produto.getNome());
+		Produto busca = repositorioProduto.findByNome(produto.getNome());
 
-		if (!busca.isEmpty()) {
-			for (Produto p : busca) {
-				if (p.getNome().equals(produto.getNome()))
-					throw new ProdutoJaRegistradoException();
-			}
-		}
+		if (busca != null)
+			if (busca.getNome().equals(produto.getNome()))
+				throw new ProdutoJaRegistradoException();
 
 		repositorioProduto.save(produto);
 	}
@@ -72,13 +69,13 @@ public class NegocioProduto implements IColecaoProduto {
 	}
 
 	@Override
-	public List<Produto> listarPorNome(String nome) throws NomeNaoEncontradoException {
-		List<Produto> produtos = repositorioProduto.findAllByNome(nome);
+	public Produto listarPorNome(String nome) throws NomeNaoEncontradoException {
+		Produto produto = repositorioProduto.findByNome(nome);
 
-		if (produtos.isEmpty())
+		if (produto == null)
 			throw new NomeNaoEncontradoException();
 
-		return produtos;
+		return produto;
 	}
 
 	@Override
@@ -104,6 +101,11 @@ public class NegocioProduto implements IColecaoProduto {
 		produtoComDesconto.setPrecoDesconto(novoPreco);
 	}
 
-	// Produto avariado
+	@Override
+	public boolean temDesconto(Produto p) {
+		return p.getPrecoDesconto() != -1;
+	}
+
+	
 
 }
