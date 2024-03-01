@@ -35,7 +35,7 @@
                 <tbody id="corpoTabelaOuvidorias">
                     <tr th:each="ouvidoria : ${ouvidoria}">
                         <td th:text="${ouvidoria.id}"></td>
-                        <td th:text="${ouvidoria.cliente}"></td>
+                        <td th:text="${ouvidoria.cliente.nome}"></td>
                         <td th:text="${ouvidoria.mensagem}"></td>
                     </tr>
                 </tbody>
