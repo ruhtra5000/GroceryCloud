@@ -72,10 +72,10 @@ public class NegocioFuncionario implements IColecaoFuncionario {
     }
 
     @Override
-    public List<Funcionario> listarPorNome(String nome) throws NomeNaoEncontradoException {
+    public List<Funcionario> listarPorNome(String nome) throws NomeFuncionarioNaoEncontradoException {
         List<Funcionario> funcionario = repositorioFuncionario.findAllByNome(nome);
 		if (funcionario.isEmpty())
-			throw new NomeNaoEncontradoException();
+			throw new NomeFuncionarioNaoEncontradoException();
 		return funcionario;  
     }
 }

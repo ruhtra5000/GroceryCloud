@@ -20,7 +20,6 @@ public interface IColecaoFuncionario {
     Funcionario listarPorId(long id) throws FuncionarioNaoEncontradoException;
     Funcionario listarPorCpf(String cpf) throws CpfNaoEncontradoException;
     List<Funcionario> listarTodos();
-    List<Funcionario> listarPorNome(String nome) throws NomeNaoEncontradoException;
+    List<Funcionario> listarPorNome(String nome) throws NomeFuncionarioNaoEncontradoException;
     Funcionario buscarPorCpfESenha(String cpf, String senha);
 } 
-    

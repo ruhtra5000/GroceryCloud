@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoAquisicao;
+import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoCliente;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoFuncionario;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoOuvidoria;
 import br.com.grocerycloud.grocerycloud.negocio.colecoes.IColecaoProduto;
@@ -23,9 +24,11 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Venda;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.AquisicaoNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjInvalidoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.aquisicoes.CnpjNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.cliente.NomeClienteNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.CpfNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioDuplicadoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.FuncionarioNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.funcionarios.NomeFuncionarioNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.OuvidoriaNaoEncontradaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.produtos.AvariadoNaoEncontradoException;
@@ -57,6 +60,8 @@ public class FachadaGerente {
     private IColecaoFuncionario colecaoFuncionario;
     @Autowired
     private IColecaoOuvidoria colecaoOuvidoria;
+    @Autowired
+    private IColecaoCliente colecaoCliente;
 
     /**
      * Métodos que tangem os produtos, na fachada do gerente.
@@ -202,7 +207,7 @@ public class FachadaGerente {
         return colecaoFuncionario.listarPorCpf(Cpf);
     }
 
-    public List<Funcionario> buscarFuncionarioPorNome(String Nome) throws NomeNaoEncontradoException{
+    public List<Funcionario> buscarFuncionarioPorNome(String Nome) throws NomeFuncionarioNaoEncontradoException{
         return colecaoFuncionario.listarPorNome(Nome);
     }
 
@@ -224,6 +229,16 @@ public class FachadaGerente {
     List<Ouvidoria> buscarPorCliente(Cliente cliente) throws ClienteNaoEncontradoException{
         return colecaoOuvidoria.listarPorCliente(cliente);
     }
+
+    //CLIENTE
+    public List<Cliente> listarClientes(){
+        return colecaoCliente.listarTodos();
+    }
+
+    public List<Cliente> buscarClientePorNome(String Nome) throws NomeClienteNaoEncontradoException {
+        return colecaoCliente.listarPorNome(Nome);
+    }
+
 }
 
 
