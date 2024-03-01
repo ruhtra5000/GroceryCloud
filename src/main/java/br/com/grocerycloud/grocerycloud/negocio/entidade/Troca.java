@@ -8,6 +8,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
+/** 
+ * Esta classe representa a troca de um produto que foi avariado.
+ * @author João Victor Leite Dos Santos
+ * @category Entidade básica da aplicação
+*/
+
 @Entity
 public class Troca {
     @Id

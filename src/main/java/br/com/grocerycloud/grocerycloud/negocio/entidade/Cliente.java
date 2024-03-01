@@ -2,6 +2,14 @@ package br.com.grocerycloud.grocerycloud.negocio.entidade;
 
 import jakarta.persistence.Entity;
 
+
+/** 
+ * Esta classe representa um Cliente
+ * que acessa o Grocery Cloud.
+ * @author João Victor Leite Dos Santos
+ * @category Entidade básica da aplicação
+*/
+
 @Entity
 public class Cliente extends Usuario {
     private boolean vinculo;
