@@ -3,7 +3,7 @@ import java.util.List;
 
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Cliente;
 import br.com.grocerycloud.grocerycloud.negocio.entidade.Ouvidoria;
-import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoException;
+import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.ClienteNaoEncontradoOuvidoriaException;
 import br.com.grocerycloud.grocerycloud.negocio.excecoes.ouvidoria.OuvidoriaNaoEncontradaException;
 
 /** 
@@ -18,6 +18,6 @@ public interface IColecaoOuvidoria {
 
     List<Ouvidoria> listarTodos();
     Ouvidoria listarPorId(long id) throws OuvidoriaNaoEncontradaException;
-    List<Ouvidoria> listarPorCliente(Cliente cliente) throws ClienteNaoEncontradoException;
+    List<Ouvidoria> listarPorCliente(Cliente cliente) throws ClienteNaoEncontradoOuvidoriaException;
 } 
     

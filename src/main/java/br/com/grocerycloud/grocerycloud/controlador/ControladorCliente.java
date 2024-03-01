@@ -32,7 +32,20 @@ public class ControladorCliente {
         ModelAndView mv = new ModelAndView("/cliente/criarouvidoria");
         return mv;
     }
-    
+
+    @PostMapping("/ouvidoria/registro") 
+    public ModelAndView registrarOuvidoriaFunction(RequisicaoCriarOuvidoria r) throws ClienteNaoEncontradoException {
+        ModelAndView mv = new ModelAndView("redirect:/cliente/ouvidoria");
+        try {
+            fachadaCliente.criarOuvidoria(r.getId(), r.getMensagem());
+        }
+        catch(ClienteNaoEncontradoException err){
+            mv.setViewName("geral/erro");
+            mv.addObject("erro", err.getMessage());   
+        }
+        return mv;
+    }
+
     @PostMapping("/ouvidoria")
     public ModelAndView adicionaroOuvidoriaFunction(RequisicaoCriarOuvidoria r) throws ClienteNaoEncontradoException {
         ModelAndView mv = new ModelAndView("redirect:/cliente/");     
