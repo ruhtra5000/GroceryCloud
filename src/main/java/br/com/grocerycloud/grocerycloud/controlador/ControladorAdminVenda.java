@@ -9,6 +9,8 @@ import br.com.grocerycloud.grocerycloud.negocio.excecoes.vendas.VendaNaoEncontra
 import br.com.grocerycloud.grocerycloud.negocio.fachada.FachadaGerente;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /** 
  * Esta classe representa o controlador de venda da gerencia.

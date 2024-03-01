@@ -8,12 +8,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
-/**
+/** 
  * Esta classe representa um produto que foi avariado.
- * 
  * @author Guilherme Paes Cavalcanti
  * @category Entidade básica da aplicação
- */
+*/
 
 @Entity
 public class ProdutoAvariado {
@@ -23,6 +22,7 @@ public class ProdutoAvariado {
 
 	@ManyToOne
 	private Produto produto;
+
 
 	private int qtdeAvariados;
 	private Date dataAvariado;

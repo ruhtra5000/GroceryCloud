@@ -46,7 +46,7 @@ public class ControladorHome {
                 }
             }
             else if(usuario instanceof Cliente){
-                mv.setViewName("redirect:/cliente/");
+                mv.setViewName("redirect:/");
             }
         }
         catch(UsuarioNaoEncontradoException err){

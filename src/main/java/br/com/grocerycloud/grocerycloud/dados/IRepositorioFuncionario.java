@@ -12,10 +12,9 @@ import br.com.grocerycloud.grocerycloud.negocio.entidade.Funcionario;
 
 @Repository
 public interface IRepositorioFuncionario extends JpaRepository <Funcionario, Long> {
-
+	public List<Funcionario> findAllByOrderById();
 	public Funcionario findById(long id);
 	public List<Funcionario> findAllByNome(String nome);
-	public List<Funcionario> findAllByOrderById();
 	public Funcionario findByCpf(String cpf);
 	public Funcionario findByCpfAndSenha(String cpf, String senha);
 }
