@@ -24,6 +24,7 @@ public interface IColecaoVenda {
     void removerProdutoVenda(Venda venda, long idProduto) throws ProdutoNaoEncontradoException;
     List<ProdutoVenda> listarProdutosVenda(Venda venda);
     void calcularValorTotal(Venda venda);
+    void darDescontoVinculo(Venda venda);
     
     //Listagem de venda
     List<Venda> listarTodos();

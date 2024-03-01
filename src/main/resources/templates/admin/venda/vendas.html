@@ -24,7 +24,7 @@
                     <th scope="col">Op. de caixa</th>
                     <th scope="col">Valor total</th>
                     <th scope="col">Data</th>
-                    <th scope="col">Detalhar</th>
+                    <th scope="col">Ações</th>
                   </tr>
             </thead>
             <tbody>
@@ -32,9 +32,12 @@
                     <td th:text="${venda.id}"></td>
                     <td th:text="${venda.cliente.nome}"></td>
                     <td th:text="${venda.funcionario.nome}"></td>
-                    <td th:text="${venda.valorTotal}"></td>
+                    <td th:text="${'R$ '+venda.valorTotal}"></td>
                     <td th:text="${venda.dataVenda}"></td>
-                    <td th:href="@{'/admin/venda/'+venda.id}"></td>
+                    <td>
+                        <a th:href="${'/admin/venda/'+venda.id}">
+                        <button class="btn btn-info btn-sm">Detalhar</button></a>
+                    </td>
                 </tr>
             </tbody>
         </table>

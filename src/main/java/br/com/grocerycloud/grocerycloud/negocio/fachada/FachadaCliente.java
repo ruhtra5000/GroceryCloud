@@ -59,7 +59,7 @@ public class FachadaCliente {
 
 
     /** 
-     * Métodos relacionados aos produtos em promoção.
+     * Método que lista os produtos em promoção.
      * @author Arthur de Sá Tenório
     */
     public List<Produto> buscarProdutosComDesconto(){
@@ -80,12 +80,14 @@ public class FachadaCliente {
     public List<Venda> visualizarHistoricoDeCompras(String nome) throws NomeClienteNaoEncontradoException, UsuarioSemVendasException {
         Cliente cliente = (Cliente) colecaoCliente.listarPorNome(nome);
         if (cliente.getNome().equals(nome)){
-            if (colecaoVenda == null ) {
+            if (colecaoVenda == null) {
                 throw new UsuarioSemVendasException();
-            } else if (colecaoVenda != null) {
+            } 
+            else if (colecaoVenda != null) {
                 return colecaoVenda.listarPorCliente(cliente);
             }
-        } else{
+        } 
+        else {
             throw new NomeClienteNaoEncontradoException();
         }
         return null;
@@ -96,7 +98,8 @@ public class FachadaCliente {
         if (cliente.getNome().equals(nome)){
             if (cliente.getVinculo() == true){
                 cliente.setVinculo(false);
-            } else{
+            } 
+            else{
                 cliente.setVinculo(true);
             }
         }

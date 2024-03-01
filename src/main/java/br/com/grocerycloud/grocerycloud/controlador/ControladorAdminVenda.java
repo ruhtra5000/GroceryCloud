@@ -30,12 +30,12 @@ public class ControladorAdminVenda {
         mv.addObject("vendas", fachadaGerente.listarVendas());
         return mv;
     }
-
-    @GetMapping("/{id}")
-    public ModelAndView detalharVenda(@PathVariable("id") long idVenda) {
-        ModelAndView mv = new ModelAndView("/admin/venda/vendaDetalhada");
+    
+    @GetMapping("/id/{id}")
+    public ModelAndView buscarVenda(@PathVariable("id") long idVenda){
+        ModelAndView mv = new ModelAndView("admin/venda/vendas");
         try {
-            mv.addObject("venda", fachadaGerente.listarVendaPorId(idVenda));
+            mv.addObject("vendas", fachadaGerente.listarVendaPorId(idVenda));
         }
         catch (VendaNaoEncontradaException err){
             mv.setViewName("geral/erro");
@@ -43,12 +43,12 @@ public class ControladorAdminVenda {
         }
         return mv;
     }
-    
-    @GetMapping("/id/{id}")
-    public ModelAndView buscarVenda(@PathVariable("id") long idVenda){
-        ModelAndView mv = new ModelAndView("admin/venda/vendas");
+
+    @GetMapping("/{id}")
+    public ModelAndView detalharVenda(@PathVariable("id") long idVenda) {
+        ModelAndView mv = new ModelAndView("/admin/venda/vendaDetalhada");
         try {
-            mv.addObject("vendas", fachadaGerente.listarVendaPorId(idVenda));
+            mv.addObject("venda", fachadaGerente.listarVendaPorId(idVenda));
         }
         catch (VendaNaoEncontradaException err){
             mv.setViewName("geral/erro");
