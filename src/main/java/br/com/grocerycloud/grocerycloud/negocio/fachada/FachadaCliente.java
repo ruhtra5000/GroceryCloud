@@ -77,6 +77,10 @@ public class FachadaCliente {
 
     }
 
+    /** 
+     * Métodos que tangem a visualização de historico e atualização de vinculo, na fachada do cliente.
+     * @author João Victor Leite Dos Santos
+    */
     public List<Venda> visualizarHistoricoDeCompras(String nome) throws NomeClienteNaoEncontradoException, UsuarioSemVendasException {
         Cliente cliente = (Cliente) colecaoCliente.listarPorNome(nome);
         if (cliente.getNome().equals(nome)){
